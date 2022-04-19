@@ -1,5 +1,8 @@
+import { navigate } from "raviger";
 import React, { useState } from "react";
+import { register } from "../api/apiSuper";
 import FormField from "../Components/FormField";
+import { Error, UserRegisterApi, validateUserRegister } from "../types/api/user";
 
 export default function Register() {
 
@@ -7,6 +10,8 @@ export default function Register() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
+    const [error, setError] = useState<Error<UserRegisterApi>>({})
+    const [loading, setLoading] = useState(false)
 
     const handleUsernameChange = (e:any)=>{
 
@@ -26,6 +31,41 @@ export default function Register() {
     const handlePassword2Change = (e:any)=>{
 
         setPassword2(e.target.value)
+    }
+
+    const handleSubmit = async (e:any)=>{
+        e.preventDefault()
+
+        setLoading(true)
+        const user:UserRegisterApi = {username:username, email:email, password: password}
+
+        const validationError = validateUserRegister(user)
+        setError(validationError);
+        if(password !== password2)
+        {
+            setError({...error, password:"Passwords doest not match"})
+        }
+
+        // if user form is valid
+        if(Object.keys(validationError).length === 0) {
+            try {
+                const data = await register(user)
+                navigate("/login")
+            } 
+            catch(error)
+            {
+                console.log(error)
+                // triggerToast("error", "Server Error, Please try again later.")
+            }
+        }
+        else {
+            // if(validationError.username)
+            //     triggerToast("warning", `${validationError.username}`)
+            // if(validationError.password)
+            //     triggerToast("warning", `${validationError.password}`)
+        }
+        setLoading(false)
+
     }
     
 
@@ -55,15 +95,26 @@ export default function Register() {
             <FormField id="3" label="Password" type="password" value={password} handleChangeCB={handlePasswordChange} />
             <FormField id="4" label="Confirm Password" type="password" value={password2} handleChangeCB={handlePassword2Change} />
 
-    
+            {loading?
+            <div className="flex justify-center items-center">
+                <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            :
             <button
                 type="submit"
                 className="mt-10 inline-block px-7 py-3 bg-yellow-400 text-red-700 font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                onClick={handleSubmit}
             >
                 Register
             </button>
+            }   
+
+
+            {Object.keys(error).length !== 0 && <p className='text-red-500 text-center mt-10'>{error.password} <br/> {error.username} <br/> {error.email}</p>}
     
             </form>
         </div>

@@ -1,10 +1,15 @@
+import { navigate } from "raviger";
 import React, { useState } from "react";
+import { login } from "../api/apiSuper";
 import FormField from "../Components/FormField";
+import { Error, UserLoginApi, validateUserLogin } from "../types/api/user";
 
 export default function Signin() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState<Error<UserLoginApi>>({})
+    const [loading, setLoading] = useState(false)
 
     const handleUsernameChange = (e:any)=>{
 
@@ -16,6 +21,43 @@ export default function Signin() {
 
         setPassword(e.target.value)
     }
+
+    const handleSubmit = async (e:any)=>{
+        e.preventDefault();
+
+        setLoading(true)
+        const user:UserLoginApi = {username:username, password: password}
+
+        const validationError = validateUserLogin(user)
+        setError(validationError);
+
+        // if user form is valid
+        if(Object.keys(validationError).length === 0) {
+            try {
+                const data = await login(user)
+                localStorage.setItem("token", data.token)
+                navigate("/dashboard")
+                
+                window.location.reload()
+
+               
+            } 
+            catch(error)
+            {
+                console.log(error)
+                // triggerToast("error", "Server Error, Please try again later.")
+            }
+        }
+        else {
+            // if(validationError.username)
+            //     triggerToast("warning", `${validationError.username}`)
+            // if(validationError.password)
+            //     triggerToast("warning", `${validationError.password}`)
+        }
+
+        setLoading(false)
+    }
+    
 
     
 
@@ -63,15 +105,26 @@ export default function Signin() {
                 >Forgot password?</a
                 >
             </div>
-    
+
+            {loading?
+            <div className="flex justify-center items-center">
+                <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            :
             <button
                 type="submit"
                 className="mt-10 inline-block px-7 py-3 bg-yellow-400 text-red-700 font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                onClick={handleSubmit}
             >
                 Login
             </button>
+            }
+
+            {Object.keys(error).length !== 0 && <p className='text-red-500 text-center mt-10'>{error.password} <br/> {error.username}</p>}
     
             </form>
         </div>
