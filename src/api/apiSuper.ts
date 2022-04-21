@@ -101,5 +101,9 @@ export const deleteTask = (task_id:number)=>{
 }
 
 export const editTask = (task_id:number, task:TaskCreateApi)=>{
-    return request(`task/${task_id}`, 'PUT', task, false)
+    return request(`task/${task_id}/`, 'PUT', task, false)
+}
+
+export const toogleTaskComplete = (task_id:number,completed:boolean)=>{
+    return request(`task/${task_id}/`, 'PATCH', {completed:completed}, false)
 }

@@ -172,7 +172,7 @@ export default function EditTask(props:{
     }
 
     return (
-        <ModalParent loading={submitLoading} open={props.open} title="Create Task" toogleOpen={props.toogleOpen} handleSubmit={handleSubmit}>
+        <ModalParent loading={submitLoading} open={props.open} title="Edit Task" toogleOpen={props.toogleOpen} handleSubmit={handleSubmit}>
             <div className="flex flex-col ml-5 gap-y-2">
                 <FormField id="1" label="Title" type="text" value={title} handleChangeCB={handleTitleChange}/>
                 <TextAreaField id="2" label="Description" value={description} handleChangeCB={handleDescriptionChange}/>

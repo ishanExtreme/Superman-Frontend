@@ -8,8 +8,8 @@ export default function CreateForm(props:{
     toogleOpen:(open:boolean)=>void,
     title: string,
     children: React.ReactNode,
-    handleSubmit: ()=>void
-    loading:boolean
+    handleSubmit?: ()=>void
+    loading?:boolean
 
 }) {
 
@@ -68,20 +68,22 @@ export default function CreateForm(props:{
                       Close
                     </button>
 
-                    {props.loading?
-                    <div className="spinner-border animate-spin inline-block w-8 h-8 text-yellow-400 border-4 rounded-full" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
-                    :
-                    <button
-                      type="button"
-                      className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-red-700 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300 sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={props.handleSubmit}
-    
-                    >
-                      Submit
-                    </button>
-                    }
+                    {props.handleSubmit && <div>
+                      {props.loading?
+                      <div className="spinner-border animate-spin inline-block w-8 h-8 text-yellow-400 border-4 rounded-full" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                      </div>
+                      :
+                      <button
+                        type="button"
+                        className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-red-700 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300 sm:ml-3 sm:w-auto sm:text-sm"
+                        onClick={props.handleSubmit}
+      
+                      >
+                        Submit
+                      </button>
+                      }
+                    </div>}
                   </div>
                 </div>
               </Transition.Child>
