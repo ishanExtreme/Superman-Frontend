@@ -5,6 +5,6 @@ import { User } from "../types/api/user";
 export default function Dashboard(props:{currentUser:User}) {
 
     return (
-        <Navbar user={props.currentUser} />
+        <Navbar user={props.currentUser} page="Home" />
     );
 }

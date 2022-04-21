@@ -1,7 +1,14 @@
+import { navigate } from "raviger";
 import React from "react";
 import { User } from "../types/api/user";
 
-export default function Navbar(props:{user:User}) {
+export default function Navbar(props:{user:User, page:string}) {
+
+    const logout = ()=>{
+        localStorage.removeItem("token")
+        navigate("/")
+        window.location.reload()
+    }
 
     return (
     <div className="w-60 h-full shadow-md bg-white absolute" id="sidenavSecExample">
@@ -20,34 +27,57 @@ export default function Navbar(props:{user:User}) {
 
         <ul className="relative px-1">
             <li className="relative">
+            {props.page === "Home"?
+            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <img src={process.env.PUBLIC_URL + "/images/icons/home.png"} className="w-[20px] mr-2" />
+                <span className="text-white">Home</span>
+            </a>
+            :
             <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/home.png"} className="w-[20px] mr-2" />
                 <span>Home</span>
             </a>
+            }
+            
+                
             </li>
         </ul>
         <hr className="my-2"/>
         <ul className="relative px-1">
             <li className="relative">
+            {props.page === "Board"?
+            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <img src={process.env.PUBLIC_URL + "/images/icons/board.png"} className="w-[20px] mr-2" />
+                <span className="text-white">Boards</span>
+            </a>
+            :
             <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/board.png"} className="w-[20px] mr-2" />
                 <span>Boards</span>
             </a>
+            }          
             </li>
         </ul>
         <hr className="my-2"/>
         <ul className="relative px-1">
             <li className="relative">
+            {props.page === "Task"?
+            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <img src={process.env.PUBLIC_URL + "/images/icons/task.png"} className="w-[20px] mr-2" />
+                <span className="text-white">Tasks</span>
+            </a>
+            :
             <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/task.png"} className="w-[20px] mr-2" />
                 <span>Tasks</span>
             </a>
+            }
             </li>
         </ul>
        
         <div className="text-center bottom-0 absolute w-full p-5">
             <hr className="mb-3"/>
-            <button type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Logout</button>
+            <button onClick={logout} type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Logout</button>
         </div>
     </div>
     );

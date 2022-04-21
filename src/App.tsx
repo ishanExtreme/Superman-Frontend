@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'tw-elements';
 import { me } from './api/apiSuper';
+import AppContainer from './Components/AppContainer';
 import AppRouter from './routes/AppRouter';
 import { User } from './types/api/user';
 
@@ -38,12 +39,14 @@ function App() {
 
   return (
     loading?
-   
-      <div className="flex flex-row justify-center  mt-3 mb-3"> 
+
+    <AppContainer >
+      <div className="flex flex-row justify-center w-full items-center mt-3 mb-3"> 
           <div className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0" role="status">
               <span className="visually-hidden">Loading...</span>
           </div>
       </div>
+    </AppContainer>  
    
     :
     <AppRouter currentUser={currentUser}/>

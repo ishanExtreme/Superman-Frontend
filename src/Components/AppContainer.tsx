@@ -7,7 +7,7 @@ export default function AppContainer(props:{children:React.ReactNode}) {
 
     return (
        
-        <div className="flex h-screen bg-gray-100 items-center">
+        <div className="flex h-screen bg-gray-100">
             {props.children}
         </div>
         

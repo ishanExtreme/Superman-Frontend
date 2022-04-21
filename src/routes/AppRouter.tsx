@@ -7,15 +7,18 @@ import Signin from '../Pages/Signin';
 import { User } from '../types/api/user';
 import Dashboard from '../Pages/Dashboard';
 import Restricted from '../Pages/Restricted';
+import ListTask from '../Pages/ListTask';
 
 
 
 const routes = {
     '/': ()=> <Home /> ,
-    '/register': ()=> <Register />,
-    '/login': ()=><Signin />,
+    '/register': ({user}:{user?:User})=> <Register user={user}/>,
+    '/login': ({user}:{user?:User})=><Signin user={user}/>,
     '/dashboard': ({user}:{user?:User})=>user?
-    <Dashboard currentUser={user} />:<Restricted />
+    <Dashboard currentUser={user} />:<Restricted />,
+    '/tasks': ({user}:{user?:User})=>user?
+    <ListTask currentUser={user} />:<Restricted />
 }
 
 export default function AppRouter(props:{currentUser:User}) {

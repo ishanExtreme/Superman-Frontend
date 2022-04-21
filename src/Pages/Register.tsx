@@ -1,10 +1,10 @@
 import { navigate } from "raviger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { register } from "../api/apiSuper";
 import FormField from "../Components/FormField";
-import { Error, UserRegisterApi, validateUserRegister } from "../types/api/user";
+import { Error, User, UserRegisterApi, validateUserRegister } from "../types/api/user";
 
-export default function Register() {
+export default function Register(props:{user?:User}) {
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -12,6 +12,11 @@ export default function Register() {
     const [password2, setPassword2] = useState("")
     const [error, setError] = useState<Error<UserRegisterApi>>({})
     const [loading, setLoading] = useState(false)
+
+    useEffect(()=>{
+        if(props.user)
+            navigate("/dashboard")
+    },[])
 
     const handleUsernameChange = (e:any)=>{
 

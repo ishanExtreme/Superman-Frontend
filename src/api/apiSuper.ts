@@ -1,3 +1,4 @@
+import { TaskCreateApi } from "../types/api/task";
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 
 const API_BASE_URL = "http://127.0.0.1:8000/api/"
@@ -77,4 +78,20 @@ export const login = (user:UserLoginApi)=> {
 
 export const me = ()=>{
     return request('user/me', 'GET')
+}
+
+export const taskList = (filters:any)=>{
+    return request('task', 'GET', filters)
+}
+
+export const stagesOfBoard = (board_id:number)=>{
+    return request(`board/${board_id}/stage`, 'GET')
+}
+
+export const createTask = (task:TaskCreateApi)=>{
+    return request('task/', 'POST', task)
+}
+
+export const getBoards = ()=>{
+    return request('board', 'GET')
 }

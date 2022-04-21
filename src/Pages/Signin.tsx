@@ -1,15 +1,21 @@
 import { navigate } from "raviger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../api/apiSuper";
 import FormField from "../Components/FormField";
-import { Error, UserLoginApi, validateUserLogin } from "../types/api/user";
+import { Error, User, UserLoginApi, validateUserLogin } from "../types/api/user";
 
-export default function Signin() {
+export default function Signin(props:{user?:User}) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState<Error<UserLoginApi>>({})
     const [loading, setLoading] = useState(false)
+
+
+    useEffect(()=>{
+        if(props.user)
+            navigate("/dashboard")
+    },[])
 
     const handleUsernameChange = (e:any)=>{
 
