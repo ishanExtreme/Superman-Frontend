@@ -99,3 +99,7 @@ export const getBoards = ()=>{
 export const deleteTask = (task_id:number)=>{
     return request(`task/${task_id}`, 'DELETE', {}, false)
 }
+
+export const editTask = (task_id:number, task:TaskCreateApi)=>{
+    return request(`task/${task_id}`, 'PUT', task, false)
+}

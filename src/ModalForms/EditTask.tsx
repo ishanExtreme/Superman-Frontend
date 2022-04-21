@@ -3,9 +3,10 @@ import FormField from "../Components/FormField";
 import TextAreaField from "../Components/TextAreaField";
 import ModalParent from '../Components/ModalParent'
 import { BoardApi, StageApi, TaskCreateApi, validateTaskCreation } from "../types/api/task";
-import { createTask, getBoards, stagesOfBoard } from "../api/apiSuper";
+import { createTask, editTask, getBoards, stagesOfBoard } from "../api/apiSuper";
 import DropDownField from "../Components/DropDownField";
 import { Error } from "../types/api/user";
+import { Task } from "../types/tasks";
 
 
 const getBoardsApiCall = async (setLoading:(load:boolean)=>void, 
@@ -47,19 +48,21 @@ boardId:number)=>{
 
 }
 
-export default function CreateTask(props:{
+export default function EditTask(props:{
     open:boolean,
     toogleOpen: (open:boolean)=>void
+    task:Task
 }) {
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("")
-    const [priority, setPriority] = useState("")
+
+    const [title, setTitle] = useState(props.task.title);
+    const [description, setDescription] = useState(props.task.description)
+    const [priority, setPriority] = useState(String(props.task.priority))
     const [boardObjects, setBoardObjects] = useState<BoardApi[]>([] as BoardApi[])
     const [boardId, setBoardId] = useState(-1)
     const [stageObjects, setStageObjects] = useState<StageApi[]>([] as StageApi[])
     const [stage, setStage] = useState("")
-    const [dueDate, setDueDate] = useState("")
+    const [dueDate, setDueDate] = useState(props.task.due_date)
     const [boardLoading, setBoardLoading] = useState(false)
     const [stageLoading, setStageLoading] = useState(false)
     const [error, setError] = useState<Error<TaskCreateApi>>({})
@@ -149,7 +152,7 @@ export default function CreateTask(props:{
         // if user form is valid
         if(Object.keys(validationError).length === 0) {
             try {
-                const data = await createTask(task)  
+                await editTask(props.task.id, task)  
                 window.location.reload()
             } 
             catch(error)
@@ -197,7 +200,7 @@ export default function CreateTask(props:{
                     </div>
                     </>
                     :
-                    <DropDownField handleDropDownClickCB={handleClickStage}  label="Select Stage" options={getStageOptions()} handleSelectCB={handleStageSelect}/>
+                    <DropDownField handleDropDownClickCB={handleClickStage}  label={props.task.stage_name} options={getStageOptions()} handleSelectCB={handleStageSelect}/>
                     }
                 </div>
                 <FormField id="4" label="Due Date" type="date" value={dueDate} handleChangeCB={handleDueDateChange} />

@@ -6,6 +6,5 @@ export type Task = {
     completed: boolean,
     stage_name: string,
     due_date: string,
-    board_name: string,
-    created_date: string
+    created_date: string,
 }

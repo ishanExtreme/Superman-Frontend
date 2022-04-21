@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Task } from "../types/tasks";
 import {deleteTask} from '../api/apiSuper'
+import EditTask from "../ModalForms/EditTask";
 
 export default function TaskListingCard(props:{task:Task}) {
 
     const [loading, setLoading] = useState("")
+    const [editOpen, setEditOpen] = useState(false)
 
     const renderPriority = (priority:number)=>{
 
@@ -47,7 +49,14 @@ export default function TaskListingCard(props:{task:Task}) {
 
     }
 
+    const toogleEditOpen = (open:boolean)=>{
+        setEditOpen(open)
+    }
+
     return (
+        <>
+        <EditTask open={editOpen} toogleOpen={toogleEditOpen} task={props.task} />
+
         <div className="p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
             <div className="grid grid-cols-4 w-[50rem] gap-5">
                 <div className="col-span-2">
@@ -66,7 +75,7 @@ export default function TaskListingCard(props:{task:Task}) {
                     </div>
 
                     <div>
-                        <button type="button" className="inline-block shadow-md w-9 h-9">
+                        <button onClick={()=>toogleEditOpen(true)} type="button" className="inline-block shadow-md w-9 h-9">
                                 <img src={process.env.PUBLIC_URL + "/images/icons/edit.png"} alt="edit"/>
                         </button>
                     </div>
@@ -86,5 +95,6 @@ export default function TaskListingCard(props:{task:Task}) {
 
             </div>
         </div>
+        </>
     );
 }
