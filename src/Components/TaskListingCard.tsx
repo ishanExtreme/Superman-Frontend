@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "../types/tasks";
+import {deleteTask} from '../api/apiSuper'
 
 export default function TaskListingCard(props:{task:Task}) {
+
+    const [loading, setLoading] = useState("")
 
     const renderPriority = (priority:number)=>{
 
@@ -25,6 +28,23 @@ export default function TaskListingCard(props:{task:Task}) {
             return className+" line-through"
         else   
             return className
+    }
+
+    const deleteTaskCall = async ()=>{
+        setLoading("delete")
+
+        try{
+
+            await deleteTask(props.task.id)
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+
+        setLoading("")
+        window.location.reload()
+
     }
 
     return (
@@ -52,9 +72,15 @@ export default function TaskListingCard(props:{task:Task}) {
                     </div>
 
                     <div>
-                        <button type="button" className="inline-block shadow-md w-9 h-9">
+                        {loading==="delete"?
+                        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                        :
+                        <button type="button" className="inline-block shadow-md w-9 h-9" onClick={deleteTaskCall}>
                             <img src={process.env.PUBLIC_URL + "/images/icons/del.png"} alt="delete"/>
                         </button>
+                        }
                     </div>
                 </div>
 

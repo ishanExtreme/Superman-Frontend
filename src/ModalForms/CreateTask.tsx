@@ -141,7 +141,7 @@ export default function(props:{
             stage: parseInt(stage)    
         }
 
-        console.log(task)
+        // console.log(task)
 
         const validationError = validateTaskCreation(task)
         setError(validationError);
