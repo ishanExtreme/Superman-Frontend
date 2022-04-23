@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import 'tw-elements';
 import { me } from './api/apiSuper';
 import AppContainer from './Components/AppContainer';
-import AppRouter from './routes/AppRouter';
+import AppRouterPublic from './routes/AppRouterPublic';
+import AppRouterPrivate from './routes/AppRouterPrivate';
 import { User } from './types/api/user';
 
 const getCurrentUser = async (
@@ -49,7 +50,10 @@ function App() {
     </AppContainer>  
    
     :
-    <AppRouter currentUser={currentUser}/>
+    currentUser?
+    <AppRouterPrivate currentUser={currentUser}/>
+    :
+    <AppRouterPublic />
   );
 }
 
