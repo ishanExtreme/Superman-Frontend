@@ -6,7 +6,6 @@ import FormField from "../Components/FormField";
 import { Task } from "../types/tasks";
 import TaskListingCard from "../Components/TaskListingCard";
 import { taskList } from "../api/apiSuper";
-import ModalParent from '../Components/ModalParent'
 import CreateTask from "../ModalForms/CreateTask";
 
 const filters = ["All", "Completed", "Pending"]
@@ -72,6 +71,10 @@ export default function ListTask(props:{currentUser:User}) {
         getTasks(setLoading, setTask, filter, date, search)
     }
 
+    const handleClearFilter = ()=>{
+        getTasks(setLoading, setTask, "", "", "")
+    }
+
     const handleOpenCreate = (open:boolean)=>{
         setOpenCreate(open)
     }
@@ -116,9 +119,13 @@ export default function ListTask(props:{currentUser:User}) {
                     </div>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex flex-row justify-center gap-x-5">
                     <button onClick={handleModify} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
                         Modify Result
+                    </button>
+
+                    <button onClick={handleClearFilter} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
+                        Clear Filters
                     </button>
                 </div>
 
