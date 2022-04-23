@@ -1,4 +1,4 @@
-import { navigate } from "raviger";
+import { Link, navigate } from "raviger";
 import React from "react";
 import { User } from "../types/api/user";
 
@@ -28,15 +28,15 @@ export default function Navbar(props:{user:User, page:string}) {
         <ul className="relative px-1">
             <li className="relative">
             {props.page === "Home"?
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link href="/dashboard" className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/home.png"} className="w-[20px] mr-2" />
                 <span className="text-white">Home</span>
-            </a>
+            </Link>
             :
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link href="/dashboard" className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/home.png"} className="w-[20px] mr-2" />
                 <span>Home</span>
-            </a>
+            </Link>
             }
             
                 
@@ -62,15 +62,15 @@ export default function Navbar(props:{user:User, page:string}) {
         <ul className="relative px-1">
             <li className="relative">
             {props.page === "Task"?
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link href="/tasks" className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/task.png"} className="w-[20px] mr-2" />
                 <span className="text-white">Tasks</span>
-            </a>
+            </Link>
             :
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link href="/tasks" className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/task.png"} className="w-[20px] mr-2" />
                 <span>Tasks</span>
-            </a>
+            </Link>
             }
             </li>
         </ul>
