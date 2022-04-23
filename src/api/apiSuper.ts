@@ -107,3 +107,11 @@ export const editTask = (task_id:number, task:TaskCreateApi)=>{
 export const toogleTaskComplete = (task_id:number,completed:boolean)=>{
     return request(`task/${task_id}/`, 'PATCH', {completed:completed}, false)
 }
+
+export const getCompleteTaskCount = ()=>{
+    return request(`count/task_complete`, 'GET')
+}
+
+export const getIncompleteTaskCount = ()=>{
+    return request(`count/task_incomplete`, 'GET')
+}

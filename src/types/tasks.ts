@@ -8,3 +8,8 @@ export type Task = {
     due_date: string,
     created_date: string,
 }
+
+export type tab = {
+    id: string,
+    title: string
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Task } from "../types/tasks";
-import ModalParent from '../Components/ModalParent'
 
 const getDate = (date:string)=>{
 
@@ -9,9 +8,7 @@ const getDate = (date:string)=>{
     return d.toDateString()
 }
 
-export default function PreviewTask(props:{
-    open:boolean,
-    toogleOpen: (open:boolean)=>void
+export default function TaskListCardSemi(props:{
     task:Task
 }){
 
@@ -31,30 +28,27 @@ export default function PreviewTask(props:{
             )
     }
 
-
     return (
-        <ModalParent open={props.open} title={props.task.title} toogleOpen={props.toogleOpen}>
-            <div className="flex flex-col ml-5 gap-y-2">
-                <div>
-                {renderPriority(props.task.priority)}
-                </div>
-                <p className="italic text-gray-200">{props.task.description}</p>
-                <p className="italic text-gray-200">Task's priority is{` ${props.task.priority}`}</p>
-                {props.task.completed?
+        <div className="w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
+            <div className="grid grid-cols-6 gap-5">
+                <p className="text-gray-500 font-semibold">{props.task.title}</p>
+                <div>{renderPriority(props.task.priority)}</div>
+                <p className="italic text-gray-500">Stage set to {props.task.stage_name}</p>
+                {props.task.completed
+                ?
                 <div className="flex flex-row items-center gap-x-2">
-                    <p className="italic text-gray-200">Task completed</p>
+                    <p className="italic text-gray-500">Task completed</p>
                     <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/tick.png"} />
                 </div>
                 :
                 <div className="flex flex-row items-center gap-x-2">
-                    <p className="italic text-gray-200">Task Pending</p>
+                    <p className="italic text-gray-500">Task Pending</p>
                     <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/pending.png"} />
                 </div>
                 }
-                <p className="italic text-gray-200">Task's Stage is {` ${props.task.stage_name}`}</p>
-                <p className="italic text-gray-200">Task Created on {` ${getDate(props.task.created_date)}`}</p>
-                <p className="italic text-gray-200">Task Due on {` ${getDate(props.task.due_date)}`}</p>
+                <p className="italic text-gray-500">Created on {` ${getDate(props.task.created_date)}`}</p>
+                <p className="italic text-gray-500">Due on {` ${getDate(props.task.due_date)}`}</p>
             </div>
-        </ModalParent>
+        </div>
     );
 }

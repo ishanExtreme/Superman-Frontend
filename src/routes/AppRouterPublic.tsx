@@ -4,13 +4,15 @@ import Home from '../Pages/Home';
 import AppContainer from '../Components/AppContainer';
 import Register from '../Pages/Register';
 import Signin from '../Pages/Signin';
+import BoardList from '../Pages/BoardList';
 
 const Publicroutes = {
     '/': ()=> <Home /> ,
     '/register': ()=> <Register user={null}/>,
     '/login': ()=><Signin user={null}/>,
     '/dashboard':()=><Signin user={null}/>,
-    '/tasks': ()=><Signin user={null}/>
+    '/tasks': ()=><Signin user={null}/>,
+    '/boards': ()=><BoardList currentUser={null} />,
 }
 
 
