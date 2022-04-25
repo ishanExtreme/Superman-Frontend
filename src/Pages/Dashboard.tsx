@@ -137,10 +137,10 @@ export default function Dashboard(props:{currentUser:User}) {
             </div>)
             :
            (<div className="flex flex-col mt-10 gap-y-5">
-                {tasks.map((task)=>{
+                {tasks.map((task, index)=>{
 
                     return(
-                        <TaskListCardSemi task={task} />
+                        <TaskListCardSemi key={index} task={task} />
                     )
                 })}
             </div>)

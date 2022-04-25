@@ -107,7 +107,7 @@ export default function ListTask(props:{currentUser:User}) {
                     <div className="inline-flex pt-2">
                         <div>
                             <button onClick={()=>handleOpenCreate(true)} type="button" className="px-6 pt-2.5 pb-2 bg-red-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
-                            <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" />
+                            <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" alt="Add"/>
                             Create Task
                             </button>
                         </div>
@@ -126,11 +126,17 @@ export default function ListTask(props:{currentUser:User}) {
             </div>
 
             <div className="flex flex-col mt-10 gap-y-5">
-                {tasks.map((task)=>{
+                {tasks.length === 0?
+                <div className="mt-10 flex flex-row justify-center p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
+                    <p>Nothing Found</p>
+                </div>
+                :
+                tasks.map((task)=>{
                     return (
                         <TaskListingCard key={task.id} task={task} />
                     );
-                })}
+                })
+                }
             </div>
 
         </NavPagesParent>

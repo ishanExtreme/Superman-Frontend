@@ -1,7 +1,7 @@
 import { TaskCreateApi } from "../types/api/task";
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/"
+const API_BASE_URL = "https://superman-api.herokuapp.com/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
@@ -25,6 +25,9 @@ const request = async (endpoint: string, method:RequestMethod = 'GET', data:any 
     // Token Based Authentication
     const token = localStorage.getItem("token");
     let auth = token ? "Token " + token : "";
+
+    if(!token && endpoint === "user/me")
+        return
 
     let response
     if(token)

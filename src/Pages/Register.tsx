@@ -16,6 +16,14 @@ export default function Register(props:{user?:User}) {
     useEffect(()=>{
         if(props.user)
             navigate("/dashboard")
+        return (()=>{
+            setUsername("")
+            setEmail("")
+            setPassword("")
+            setPassword2("")
+            setError({})
+            setLoading(false)
+        })
     },[])
 
     const handleUsernameChange = (e:any)=>{
@@ -54,7 +62,7 @@ export default function Register(props:{user?:User}) {
         // if user form is valid
         if(Object.keys(validationError).length === 0) {
             try {
-                const data = await register(user)
+                await register(user)
                 navigate("/login")
             } 
             catch(error)
