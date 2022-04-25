@@ -105,7 +105,6 @@ export default function Dashboard(props:{currentUser:User}) {
     const [completeCout, setCompleteCount] = useState(-1)
     const [incompleteCountLoading, setIncompleteCountLoading] = useState(false)
     const [incompleteCout, setincompleteCount] = useState(-1)
-    const [totalCount, setTotalCount] = useState(-1)
 
     useEffect(()=>{
         getTasks(setLoading, setTask, "pending", "", "")
@@ -179,14 +178,14 @@ export default function Dashboard(props:{currentUser:User}) {
                 content={incompleteCout.toString()} 
                 end="Task Count" />
                 <SmallCard 
-                loading = {completeCountLoading || incompleteCountLoading}
-                title="Total Tasks" 
-                content={(completeCout + incompleteCout).toString()} 
-                end="Task Count" />
-                <SmallCard 
                 loading = {completeCountLoading}
                 title="Inprogress Tasks" 
                 content={incompleteCout.toString()} 
+                end="Task Count" />
+                <SmallCard 
+                loading = {completeCountLoading || incompleteCountLoading}
+                title="Total Tasks" 
+                content={(completeCout + incompleteCout).toString()} 
                 end="Task Count" />
             </div>
             <h1 className="font-semibold text-2xl mt-[100px]">My Tasks</h1>
