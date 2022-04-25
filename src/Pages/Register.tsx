@@ -2,7 +2,8 @@ import { navigate } from "raviger";
 import React, { useEffect, useState } from "react";
 import { register } from "../api/apiSuper";
 import FormField from "../Components/FormField";
-import { Error, User, UserRegisterApi, validateUserRegister } from "../types/api/user";
+import { Error as CustomError, User, UserRegisterApi, validateUserRegister } from "../types/api/user";
+import { triggerToast } from "../utils/notification";
 
 export default function Register(props:{user?:User}) {
 
@@ -10,7 +11,7 @@ export default function Register(props:{user?:User}) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
-    const [error, setError] = useState<Error<UserRegisterApi>>({})
+    const [error, setError] = useState<CustomError<UserRegisterApi>>({})
     const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
@@ -63,19 +64,22 @@ export default function Register(props:{user?:User}) {
         if(Object.keys(validationError).length === 0) {
             try {
                 await register(user)
+                triggerToast("success", "Registared succesfully!")
                 navigate("/login")
             } 
-            catch(error)
+            catch(error:any)
             {
-                console.log(error)
-                // triggerToast("error", "Server Error, Please try again later.")
+                
+    
             }
         }
         else {
-            // if(validationError.username)
-            //     triggerToast("warning", `${validationError.username}`)
-            // if(validationError.password)
-            //     triggerToast("warning", `${validationError.password}`)
+            if(validationError.username)
+                triggerToast("warning", `${validationError.username}`)
+            if(validationError.password)
+                triggerToast("warning", `${validationError.password}`)
+            if(validationError.email)
+            triggerToast("warning", `${validationError.email}`)
         }
         setLoading(false)
 

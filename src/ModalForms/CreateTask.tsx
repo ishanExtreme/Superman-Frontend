@@ -7,7 +7,6 @@ import { createTask, getBoards, stagesOfBoard } from "../api/apiSuper";
 import DropDownField from "../Components/DropDownField";
 import { Error } from "../types/api/user";
 
-
 const getBoardsApiCall = async (setLoading:(load:boolean)=>void, 
 setBoards:(board:BoardApi[])=>void)=>{
 
@@ -154,7 +153,7 @@ export default function CreateTask(props:{
             } 
             catch(error)
             {
-                console.log(error)
+                // console.log(error)
                 // triggerToast("error", "Server Error, Please try again later.")
             }
         }
@@ -166,6 +165,7 @@ export default function CreateTask(props:{
         }
 
         setBoardLoading(false)
+        // triggerToast("success", "Task created successfully!")
     }
 
     return (

@@ -1,5 +1,6 @@
 import { TaskCreateApi } from "../types/api/task";
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
+import { triggerToast } from "../utils/notification";
 
 const API_BASE_URL = "https://superman-api.herokuapp.com/api/"
 
@@ -67,7 +68,13 @@ const request = async (endpoint: string, method:RequestMethod = 'GET', data:any 
         }
     } else {
         const errorJson = await response.json()
+        Object.values(errorJson).forEach((errors:any)=>{
+            errors.map((error:string)=>{
+                triggerToast("error", error)
+            })
+        })
         throw Error(errorJson);
+
     }
 } 
 

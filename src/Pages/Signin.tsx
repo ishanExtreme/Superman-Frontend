@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { login } from "../api/apiSuper";
 import FormField from "../Components/FormField";
 import { Error, User, UserLoginApi, validateUserLogin } from "../types/api/user";
+import { triggerToast } from "../utils/notification";
 
 export default function Signin(props:{user?:User}) {
 
@@ -50,15 +51,15 @@ export default function Signin(props:{user?:User}) {
             } 
             catch(error)
             {
-                console.log(error)
+                // console.log(error)
                 // triggerToast("error", "Server Error, Please try again later.")
             }
         }
         else {
-            // if(validationError.username)
-            //     triggerToast("warning", `${validationError.username}`)
-            // if(validationError.password)
-            //     triggerToast("warning", `${validationError.password}`)
+            if(validationError.username)
+                triggerToast("warning", `${validationError.username}`)
+            if(validationError.password)
+                triggerToast("warning", `${validationError.password}`)
         }
 
         setLoading(false)

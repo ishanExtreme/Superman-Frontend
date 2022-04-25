@@ -8,6 +8,7 @@ import TaskListingCard from "../Components/TaskListingCard";
 import { taskList } from "../api/apiSuper";
 import CreateTask from "../ModalForms/CreateTask";
 import NavPagesParent from "../Components/NavPagesParent";
+import { triggerToast } from "../utils/notification";
 
 const filters = ["All", "Completed", "Pending"]
 
@@ -68,12 +69,14 @@ export default function ListTask(props:{currentUser:User}) {
         setSearch(e.target.value)
     }
 
-    const handleModify = ()=>{
-        getTasks(setLoading, setTask, filter, date, search)
+    const handleModify = async ()=>{
+        await getTasks(setLoading, setTask, filter, date, search)
+        triggerToast("info", "Tasks Filtered")
     }
 
-    const handleClearFilter = ()=>{
-        getTasks(setLoading, setTask, "", "", "")
+    const handleClearFilter = async ()=>{
+        await getTasks(setLoading, setTask, "", "", "")
+        triggerToast("info", "Filters Cleared")
     }
 
     const handleOpenCreate = (open:boolean)=>{
