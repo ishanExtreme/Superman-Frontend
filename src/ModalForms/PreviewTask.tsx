@@ -1,6 +1,7 @@
 import React from "react";
 import { Task } from "../types/tasks";
 import ModalParent from '../Components/ModalParent'
+import ImageElement from "../Components/ImageElement";
 
 const getDate = (date:string)=>{
 
@@ -43,12 +44,24 @@ export default function PreviewTask(props:{
                 {props.task.completed?
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-200">Task completed</p>
-                    <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/tick.png"} />
+                    <ImageElement 
+                    className="w-5" 
+                    src={process.env.PUBLIC_URL + "/images/icons/tick.png"} 
+                    alt="tick"
+                    height="20px"
+                    width="20px"
+                    />
                 </div>
                 :
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-200">Task Pending</p>
-                    <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/pending.png"} />
+                    <ImageElement 
+                    className="w-5" 
+                    src={process.env.PUBLIC_URL + "/images/icons/pending.png"} 
+                    alt="tick"
+                    height="20px"
+                    width="20px"
+                    />
                 </div>
                 }
                 <p className="italic text-gray-200">Task's Stage is {` ${props.task.stage_name}`}</p>

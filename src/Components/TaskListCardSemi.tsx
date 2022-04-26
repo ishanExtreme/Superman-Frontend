@@ -1,5 +1,6 @@
 import React from "react";
 import { Task } from "../types/tasks";
+import ImageElement from "./ImageElement";
 
 const getDate = (date:string)=>{
 
@@ -38,12 +39,24 @@ export default function TaskListCardSemi(props:{
                 ?
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-500">Task completed</p>
-                    <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/tick.png"} />
+                    <ImageElement 
+                    className="w-5" 
+                    src={process.env.PUBLIC_URL + "/images/icons/tick.png"} 
+                    width="20px"
+                    height="20px"
+                    alt="tick"
+                    />
                 </div>
                 :
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-500">Task Pending</p>
-                    <img className="w-5" src={process.env.PUBLIC_URL + "/images/icons/pending.png"} />
+                    <ImageElement 
+                    className="w-5" 
+                    src={process.env.PUBLIC_URL + "/images/icons/pending.png"}
+                    width="20px"
+                    height="20px"
+                    alt="pending"
+                    />
                 </div>
                 }
                 <p className="italic text-gray-500">Created on {` ${getDate(props.task.created_date)}`}</p>

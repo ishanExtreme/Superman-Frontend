@@ -3,6 +3,7 @@ import { Task } from "../types/tasks";
 import {deleteTask, toogleTaskComplete} from '../api/apiSuper'
 import EditTask from "../ModalForms/EditTask";
 import PreviewTask from "../ModalForms/PreviewTask";
+import ImageElement from "./ImageElement";
 
 export default function TaskListingCard(props:{task:Task}) {
 
@@ -104,13 +105,25 @@ export default function TaskListingCard(props:{task:Task}) {
                 <div className="grid grid-cols-3">
                     <div>
                         <button onClick={()=>tooglePreviewOpen(true)} type="button" className="inline-block shadow-md w-9 h-9">
-                            <img src={process.env.PUBLIC_URL + "/images/icons/prev.png"} alt="preview"/>
+                            <ImageElement 
+                            src={process.env.PUBLIC_URL + "/images/icons/prev.png"} 
+                            alt="preview"
+                            className=""
+                            width="50px"
+                            height="50px"
+                            />
                         </button>
                     </div>
 
                     <div>
                         <button onClick={()=>toogleEditOpen(true)} type="button" className="inline-block shadow-md w-9 h-9">
-                                <img src={process.env.PUBLIC_URL + "/images/icons/edit.png"} alt="edit"/>
+                                <ImageElement 
+                                src={process.env.PUBLIC_URL + "/images/icons/edit.png"} 
+                                alt="edit"
+                                className=""
+                                height="50px"
+                                width="50px"
+                                />
                         </button>
                     </div>
 
@@ -121,7 +134,13 @@ export default function TaskListingCard(props:{task:Task}) {
                         </div>
                         :
                         <button type="button" className="inline-block shadow-md w-9 h-9" onClick={deleteTaskCall}>
-                            <img src={process.env.PUBLIC_URL + "/images/icons/del.png"} alt="delete"/>
+                            <ImageElement 
+                            src={process.env.PUBLIC_URL + "/images/icons/del.png"} 
+                            alt="delete"
+                            className=""
+                            height="50px"
+                            width="50px"
+                            />
                         </button>
                         }
                     </div>

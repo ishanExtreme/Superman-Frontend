@@ -2,6 +2,7 @@ import { navigate } from "raviger";
 import React, { useEffect, useState } from "react";
 import { register } from "../api/apiSuper";
 import FormField from "../Components/FormField";
+import ImageElement from "../Components/ImageElement";
 import { Error as CustomError, User, UserRegisterApi, validateUserRegister } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
@@ -91,18 +92,22 @@ export default function Register(props:{user?:User}) {
     <div className="container px-6 py-12 h-full">
         <div className="flex flex-col justify-center items-center flex-wrap h-full g-6 text-gray-800">
         <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-            <img
+            <ImageElement
             src={process.env.PUBLIC_URL+" /images/logo/half_logo_2.svg"}
             className="w-full"
             alt="Half Logo 2"
+            width="500px"
+            height="500px"
             />
         </div>
         <div className="md:w-8/12 lg:w-5/12 lg:ml-20 mt-5 p-5 mx-auto max-h-full bg-white shadow-lg rounded-xl">
             <div className="flex items-center justify-center">
-                <img 
+                <ImageElement 
                 src={process.env.PUBLIC_URL+" /images/logo/half_logo_1.svg"}
                 alt="Half Logo 1"
                 className="w-[200px]"
+                width="200px"
+                height="200px"
                 />
             </div>
             <form>

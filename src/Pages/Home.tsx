@@ -1,5 +1,6 @@
 import { Link } from "raviger";
 import React from "react";
+import ImageElement from "../Components/ImageElement";
 
 export default function Home() {
 
@@ -7,7 +8,13 @@ export default function Home() {
         <div className="flex w-full items-center justify-center">
         <div>
             <div className="w-full flex items-center justify-center">
-                <img className="b w-[250px]" src={process.env.PUBLIC_URL+" /images/logo/full_logo.svg"} alt="logo" />
+                <ImageElement 
+                className="w-[250px]" 
+                src={process.env.PUBLIC_URL+" /images/logo/full_logo.svg"} 
+                alt="logo"
+                width="250px"
+                height="250px"
+                />
             </div>
             <div className="mt-5 max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between bg-white shadow-lg p-5 rounded-2xl overflow-auto">
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
