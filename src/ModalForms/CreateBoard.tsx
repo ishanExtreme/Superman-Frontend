@@ -1,3 +1,4 @@
+import { navigate } from "raviger";
 import React, { useState } from "react";
 import { createBoard } from "../api/apiSuper";
 import FormField from "../Components/FormField";
@@ -41,9 +42,10 @@ export default function CreateBoard(props:{
         // if user form is valid
         if(Object.keys(validationError).length === 0) {
             try {
-                await createBoard(board)  
+                const data = await createBoard(board)  
                 // window.location.reload()
                 // navigate to board
+                navigate(`board/${data.id}`)
                 triggerToast("success", "Board created succesfully!")
             } 
             catch(error)

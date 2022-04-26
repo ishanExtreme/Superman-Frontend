@@ -4,10 +4,11 @@ import {deleteTask, toogleTaskComplete} from '../api/apiSuper'
 import EditTask from "../ModalForms/EditTask";
 import PreviewTask from "../ModalForms/PreviewTask";
 import DropDownIcon from "./DropDownIcon";
+import {Draggable} from 'react-beautiful-dnd';
 
 const options = ["Preview", "Edit", "Delete"]
 
-export default function TaskCard(props:{task:Task}) {
+export default function TaskCard(props:{task:Task, index:number}) {
 
     const [loading, setLoading] = useState("")
     const [editOpen, setEditOpen] = useState(false)
@@ -90,37 +91,49 @@ export default function TaskCard(props:{task:Task}) {
         <EditTask open={editOpen} toogleOpen={toogleEditOpen} task={props.task} />
         <PreviewTask open={previewOpen} toogleOpen={tooglePreviewOpen} task={props.task} />
         
-        <div className="flex flex-col gap-y-3 p-4 mx-auto bg-gray-300 shadow-lg rounded-2xl w-[350px] h-[200px]">
-            
-            <div className="flex flex-row justify-between items-center">
-                <div>
-                {renderPriority(props.task.priority)}
-                </div>
-                <DropDownIcon options={options} handleSelectCB={handleDropSelect} />
-            </div>
+        <Draggable
+        draggableId={String(props.task.id)}
+        index={props.index}
+        >
+            {provided=>(
 
-            {/* Title */}
-            <div className="flex flex-row gap-x-5 items-center ">
-            {loading === "edit" || loading === "delete"?
-            <div className="mr-5 spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-            :
-            <div className="form-check">
-                {props.task.completed?
-                <input onChange={handleToogleComplete} className="form-check-input appearance-none h-8 w-8 border border-gray-300 rounded-2xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckChecked" checked/>
-                :
-                <input onChange={handleToogleComplete} className="form-check-input appearance-none h-8 w-8 border border-gray-300 rounded-2xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckChecked"/>
-                }
+            <div 
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            className="flex flex-col gap-y-3 p-4 mx-auto bg-gray-300 shadow-lg rounded-2xl w-[350px] h-[200px]">
                 
-            </div>
-            }
-            <h2 className={getClasses("font-semibold")}>{props.task.title}</h2>
-            </div>
-            {/* Title ends */}
+                <div className="flex flex-row justify-between items-center">
+                    <div>
+                    {renderPriority(props.task.priority)}
+                    </div>
+                    <DropDownIcon options={options} handleSelectCB={handleDropSelect} />
+                </div>
 
-            <p className={getClasses("text-sm text-gray-800")}>{props.task.description}</p>
-        </div>
+                {/* Title */}
+                <div className="flex flex-row gap-x-5 items-center ">
+                {loading === "edit" || loading === "delete"?
+                <div className="mr-5 spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+                :
+                <div className="form-check">
+                    {props.task.completed?
+                    <input onChange={handleToogleComplete} className="form-check-input appearance-none h-8 w-8 border border-gray-300 rounded-2xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckChecked" checked/>
+                    :
+                    <input onChange={handleToogleComplete} className="form-check-input appearance-none h-8 w-8 border border-gray-300 rounded-2xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckChecked"/>
+                    }
+                    
+                </div>
+                }
+                <h2 className={getClasses("font-semibold")}>{props.task.title}</h2>
+                </div>
+                {/* Title ends */}
+
+                <p className={getClasses("text-sm text-gray-800")}>{props.task.description}</p>
+            </div>
+            )}
+        </Draggable>
         </>
     );
 }

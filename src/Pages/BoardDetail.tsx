@@ -12,7 +12,7 @@ import { StageApi } from "../types/api/task";
 import { User } from "../types/api/user";
 import { Board, Task } from "../types/tasks";
 import { triggerToast } from "../utils/notification";
-import {DragDropContext} from 'react-beautiful-dnd';
+import {DragDropContext, DropResult} from 'react-beautiful-dnd';
 import StageColumn from "../Components/StageColumn";
 
 
@@ -167,6 +167,47 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
         triggerToast("info", "Filters Cleared")  
     }
 
+    const onDragEnd = (result:DropResult) => {
+        const {destination, source, draggableId} = result;
+        if (!destination) {
+          return;
+        }
+        if (
+          destination.droppableId === source.droppableId &&
+          destination.index === source.index
+        ) {
+          return;
+        }
+        const newStage:StageApi = stages.filter((stage)=>stage.id === Number(destination.droppableId))[0];
+        
+        console.log(newStage.title)
+
+        setTasks(
+            tasks.map((task)=>{
+                if(task.id === Number(draggableId))
+                    task.stage_name = newStage.title
+                
+                return task
+            })
+        )
+
+        // const newHeroIds = Array.from(column.heroIds);
+        // newHeroIds.splice(source.index, 1);
+        // newHeroIds.splice(destination.index, 0, draggableId);
+        // const newColumn = {
+        //   ...column,
+        //   heroIds: newHeroIds,
+        // };
+        // const newState = {
+        //   ...this.state,
+        //   columns: {
+        //     ...this.state.columns,
+        //     [newColumn.id]: newColumn,
+        //   },
+        // };
+        // this.setState(newState);
+      };
+
     return (
        <>
        <Navbar user={props.currentUser} page="Board" />
@@ -241,9 +282,15 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
             </div>
             :
             <div className="grid grid-cols-3 mt-10 gap-y-3">
-                {stages.map((stage, index)=>(
-                    <StageColumn key={stage.id} stage={stage}  task={tasks[0]}/>
-                ))}
+                <DragDropContext onDragEnd={onDragEnd}>
+                    {stages.map((stage, index)=>{
+                        
+                        const stageTasks = tasks.filter((task)=>task.stage_name === stage.title)
+                        return(
+                        <StageColumn key={stage.id} stage={stage} tasks={stageTasks}/>
+                        )
+                    })}
+                </DragDropContext>
             </div>
             }
 
