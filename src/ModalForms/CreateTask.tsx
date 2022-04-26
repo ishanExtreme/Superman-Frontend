@@ -148,7 +148,7 @@ export default function CreateTask(props:{
         // if user form is valid
         if(Object.keys(validationError).length === 0) {
             try {
-                const data = await createTask(task)  
+                await createTask(task)  
                 window.location.reload()
             } 
             catch(error)
@@ -164,7 +164,7 @@ export default function CreateTask(props:{
             //     triggerToast("warning", `${validationError.password}`)
         }
 
-        setBoardLoading(false)
+        setSubmitLoading(false)
         // triggerToast("success", "Task created successfully!")
     }
 

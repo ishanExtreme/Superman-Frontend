@@ -13,3 +13,9 @@ export type tab = {
     id: string,
     title: string
 }
+
+export type Board = {
+    id:number,
+    title:string,
+    description:string
+}

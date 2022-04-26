@@ -6,6 +6,11 @@ export type TaskCreateApi = {
     due_date: string
 }
 
+export type BoardCreateApi = {
+    title:string,
+    description:string
+}
+
 export type BoardApi = {
     id: number,
     title: string,
@@ -56,6 +61,25 @@ export const validateTaskCreation = (task:TaskCreateApi) => {
     }
     if(task.due_date.length < 1) {
         errors.due_date = "Due date is required"
+    }
+
+    return errors;
+}
+
+export const validateBoardCreation = (board:BoardCreateApi) => {
+    const errors: Error<BoardCreateApi> = {}
+
+    if(board.title.length < 1) {
+        errors.title = "Title is Required"
+    }
+    if(board.title.length > 255) {
+        errors.title = "Title is must be less than 100 characters"
+    }
+    if(board.description.length < 1) {
+        errors.description = "Description is Required"
+    }
+    if(board.description.length > 500) {
+        errors.description = "Description is must be less than 500 characters"
     }
 
     return errors;

@@ -1,8 +1,8 @@
-import { TaskCreateApi } from "../types/api/task";
+import { BoardCreateApi, TaskCreateApi } from "../types/api/task";
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
-const API_BASE_URL = "https://superman-api.herokuapp.com/api/"
+const API_BASE_URL = " http://127.0.0.1:8000/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
@@ -124,4 +124,16 @@ export const getCompleteTaskCount = ()=>{
 
 export const getIncompleteTaskCount = ()=>{
     return request(`count/task_incomplete`, 'GET')
+}
+
+export const getBoardsFiltered = (filter:any)=>{
+    return request("board", 'GET', filter)
+}
+
+export const createBoard = (board:BoardCreateApi)=>{
+    return request("board/", 'POST', board)
+}
+
+export const editBoard = (board_id:number, board:BoardCreateApi)=>{
+    return request(`board/${board_id}/`, 'PUT', board, false)
 }

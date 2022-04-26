@@ -46,15 +46,15 @@ export default function Navbar(props:{user:User, page:string}) {
         <ul className="relative px-1">
             <li className="relative">
             {props.page === "Board"?
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded bg-red-700" href="/boards" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/board.png"} className="w-[20px] mr-2" />
                 <span className="text-white">Boards</span>
-            </a>
+            </Link>
             :
-            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="/boards" data-mdb-ripple="true" data-mdb-ripple-color="primary">
                 <img src={process.env.PUBLIC_URL + "/images/icons/board.png"} className="w-[20px] mr-2" />
                 <span>Boards</span>
-            </a>
+            </Link>
             }          
             </li>
         </ul>
