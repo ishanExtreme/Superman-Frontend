@@ -12,6 +12,8 @@ import { StageApi } from "../types/api/task";
 import { User } from "../types/api/user";
 import { Board, Task } from "../types/tasks";
 import { triggerToast } from "../utils/notification";
+import {DragDropContext} from 'react-beautiful-dnd';
+import StageColumn from "../Components/StageColumn";
 
 
 const capitalize = (word:string|undefined)=>{
@@ -33,6 +35,7 @@ const getTasks = async (
 
         setLoading(true)
         const filterList = {
+            completed:false,
             due_date:date
         }
         try{
@@ -231,6 +234,18 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
                     Clear Filters
                 </button>
             </div>
+            {
+            stages.length === 0?
+            <div className="mt-10 flex flex-row justify-center p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
+                <p>Nothing Found</p>
+            </div>
+            :
+            <div className="grid grid-cols-3 mt-10 gap-y-3">
+                {stages.map((stage, index)=>(
+                    <StageColumn key={stage.id} stage={stage}  task={tasks[0]}/>
+                ))}
+            </div>
+            }
 
             </>
             }

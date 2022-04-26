@@ -146,3 +146,7 @@ export const createStage = (stage:StageCreateApi)=>{
     return request('stage/', 'POST', stage)
 }
 
+export const deleteStage = (stage_id:number)=>{
+    return request(`stage/${stage_id}`, 'DELETE', {}, false)
+}
+
