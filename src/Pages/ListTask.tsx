@@ -76,6 +76,7 @@ export default function ListTask(props:{currentUser:User}) {
 
     const handleClearFilter = async ()=>{
         await getTasks(setLoading, setTask, "", "", "")
+        setDate("")
         triggerToast("info", "Filters Cleared")
     }
 

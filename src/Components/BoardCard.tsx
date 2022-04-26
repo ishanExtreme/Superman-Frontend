@@ -1,3 +1,4 @@
+import { navigate } from "raviger";
 import React, { useState } from "react";
 import EditBoard from "../ModalForms/EditBoard";
 import { Board } from "../types/tasks";
@@ -24,6 +25,10 @@ export default function BoardCard(props:{
         setOpenEdit(open)
     }
 
+    const handleBoardOpen = ()=>{
+        navigate(`/board/${props.board.id}`)
+    }
+
     return (
         <>
             <EditBoard open={openEdit} toogleOpen={handleOpenEditToogle} board={props.board} />
@@ -33,8 +38,8 @@ export default function BoardCard(props:{
                     <DropDownIcon options={options} handleSelectCB={handleSelect} />
                 </div>
                 <p>{props.board.description}</p>
-                <div className="flex space-x-2 justify-center">
-                    <button type="button" className="inline-block px-6 py-2.5 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out">
+                <div className="mt-5 flex space-x-2 justify-center">
+                    <button onClick={handleBoardOpen} type="button" className="inline-block px-6 py-2.5 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out">
                         Open
                     </button>
                 </div>

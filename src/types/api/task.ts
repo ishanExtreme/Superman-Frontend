@@ -11,6 +11,12 @@ export type BoardCreateApi = {
     description:string
 }
 
+export type StageCreateApi = {
+    title:string,
+    description:string,
+    board:number
+}
+
 export type BoardApi = {
     id: number,
     title: string,
@@ -73,13 +79,38 @@ export const validateBoardCreation = (board:BoardCreateApi) => {
         errors.title = "Title is Required"
     }
     if(board.title.length > 255) {
-        errors.title = "Title is must be less than 100 characters"
+        errors.title = "Title is must be less than 255 characters"
     }
     if(board.description.length < 1) {
         errors.description = "Description is Required"
     }
     if(board.description.length > 500) {
         errors.description = "Description is must be less than 500 characters"
+    }
+
+    return errors;
+}
+
+export const validateStageCreation = (stage:StageCreateApi) => {
+    const errors: Error<StageCreateApi> = {}
+
+    if(stage.title.length < 1) {
+        errors.title = "Title is Required"
+    }
+    if(stage.title.length > 255) {
+        errors.title = "Title is must be less than 255 characters"
+    }
+    if(stage.description.length < 1) {
+        errors.description = "Description is Required"
+    }
+    if(stage.description.length > 500) {
+        errors.description = "Description is must be less than 500 characters"
+    }
+    if(isNaN(stage.board)) {
+        errors.board = "Board not provided correctly"
+    }
+    if(!stage.board) {
+        errors.board = "Board not provided"
     }
 
     return errors;

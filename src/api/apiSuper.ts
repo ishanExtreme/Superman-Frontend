@@ -1,8 +1,8 @@
-import { BoardCreateApi, TaskCreateApi } from "../types/api/task";
+import { BoardCreateApi, StageCreateApi, TaskCreateApi } from "../types/api/task";
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
-const API_BASE_URL = " http://127.0.0.1:8000/api/"
+const API_BASE_URL = " https://superman-api.herokuapp.com/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
@@ -69,7 +69,7 @@ const request = async (endpoint: string, method:RequestMethod = 'GET', data:any 
     } else {
         const errorJson = await response.json()
         Object.values(errorJson).forEach((errors:any)=>{
-            errors.map((error:string)=>{
+            errors.forEach((error:string)=>{
                 triggerToast("error", error)
             })
         })
@@ -137,3 +137,12 @@ export const createBoard = (board:BoardCreateApi)=>{
 export const editBoard = (board_id:number, board:BoardCreateApi)=>{
     return request(`board/${board_id}/`, 'PUT', board, false)
 }
+
+export const getBoard = (board_id:number)=>{
+    return request(`board/${board_id}`, 'GET')
+}
+
+export const createStage = (stage:StageCreateApi)=>{
+    return request('stage/', 'POST', stage)
+}
+

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { createBoard, editBoard } from "../api/apiSuper";
+import { createStage } from "../api/apiSuper";
 import FormField from "../Components/FormField";
 import ModalParent from "../Components/ModalParent";
 import TextAreaField from "../Components/TextAreaField";
-import { BoardCreateApi, Error, validateBoardCreation } from "../types/api/task";
-import { Board } from "../types/tasks";
-import { triggerToast } from "../utils/notification";
+import { Error, StageCreateApi, validateStageCreation } from "../types/api/task";
 
-export default function EditBoard(props:{
+
+
+export default function CreateStage(props:{
     open:boolean
     toogleOpen: (open:boolean)=>void
-    board:Board
+    boardId:number
 }) {
 
     const [submitLoading, setSubmitLoading] = useState(false)
-    const [title, setTitle] = useState(props.board.title)
-    const [description, setDescription] = useState(props.board.description)
-    const [error, setError] = useState<Error<BoardCreateApi>>({})
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [error, setError] = useState<Error<StageCreateApi>>({})
 
     const handleChangeTitle = (e:any)=>{
         setTitle(e.target.value)
@@ -27,25 +27,24 @@ export default function EditBoard(props:{
     }
 
     const handleSubmit = async ()=>{
-        
         setSubmitLoading(true)
 
-        const board:BoardCreateApi = {
+        const stage:StageCreateApi = {
             title:title, 
             description:description,
+            board:props.boardId
         }
 
         // console.log(task)
 
-        const validationError = validateBoardCreation(board)
+        const validationError = validateStageCreation(stage)
         setError(validationError);
 
         // if user form is valid
         if(Object.keys(validationError).length === 0) {
             try {
-                await editBoard(props.board.id, board)  
+                await createStage(stage)  
                 window.location.reload()
-        
             } 
             catch(error)
             {
@@ -65,12 +64,12 @@ export default function EditBoard(props:{
     }
 
     return (
-        <ModalParent loading={submitLoading} open={props.open} title="Edit Board" toogleOpen={props.toogleOpen} handleSubmit={handleSubmit}>
+        <ModalParent loading={submitLoading} open={props.open} title="Create Board" toogleOpen={props.toogleOpen} handleSubmit={handleSubmit}>
             <div className="flex flex-col ml-5 gap-y-2">
                 <FormField id="1" label="Title" type="text" handleChangeCB={handleChangeTitle} value={title}/>
                 <TextAreaField id="2" label="Description" handleChangeCB={handleChangeDescription} value={description}/>
-                {Object.keys(error).length !== 0 && <p className='text-yellow-400 text-center mt-10'>{error.title} <br/> {error.description}</p>}
+                {Object.keys(error).length !== 0 && <p className='text-yellow-400 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.board} </p>}
             </div>
         </ModalParent>
-    )
+    );
 }

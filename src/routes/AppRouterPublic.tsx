@@ -12,7 +12,7 @@ const Publicroutes = {
     '/login': ()=><Signin user={null}/>,
     '/dashboard':()=><Signin user={null}/>,
     '/tasks': ()=><Signin user={null}/>,
-    '/boards': ()=><BoardList currentUser={null} />,
+    '/boards': ()=><Signin user={null} />,
 }
 
 

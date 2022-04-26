@@ -8,6 +8,7 @@ import { User } from '../types/api/user';
 import Dashboard from '../Pages/Dashboard';
 import ListTask from '../Pages/ListTask';
 import BoardList from '../Pages/BoardList';
+import BoardDetail from '../Pages/BoardDetail';
 
 const Privateroutes = {
     '/': ()=> <Home /> ,
@@ -16,6 +17,11 @@ const Privateroutes = {
     '/dashboard': ({user}:{user?:User})=><Dashboard currentUser={user?user:null} />,
     '/tasks': ({user}:{user?:User})=><ListTask currentUser={user?user:null} />,
     '/boards': ({user}:{user?:User})=><BoardList currentUser={user?user:null} />,
+    '/board/:id': ({id, user}:{id:string, user?:User})=>
+    <BoardDetail 
+    boardId={Number(id)}
+    currentUser={user?user:null}
+    />
 }
 
 export default function AppRouterPrivate(props:{currentUser:User}) {
