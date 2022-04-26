@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBoard, stagesOfBoard, taskList } from "../api/apiSuper";
+import { changeTaskStage, getBoard, stagesOfBoard, taskList } from "../api/apiSuper";
 import DropDownField from "../Components/DropDownField";
 import FormField from "../Components/FormField";
 import ImageElement from "../Components/ImageElement";
@@ -167,6 +167,18 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
         triggerToast("info", "Filters Cleared")  
     }
 
+    const handleTaskStageChane = async (taskId:number, stage:number)=>{
+
+        try{
+            await changeTaskStage(taskId, stage)
+            triggerToast("info", "Stage Changed")  
+        }
+        catch(error)
+        {
+
+        }
+    }
+
     const onDragEnd = (result:DropResult) => {
         const {destination, source, draggableId} = result;
         if (!destination) {
@@ -179,13 +191,14 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
           return;
         }
         const newStage:StageApi = stages.filter((stage)=>stage.id === Number(destination.droppableId))[0];
-        
-        console.log(newStage.title)
 
         setTasks(
             tasks.map((task)=>{
                 if(task.id === Number(draggableId))
+                {
                     task.stage_name = newStage.title
+                    handleTaskStageChane(task.id, newStage.id)
+                }
                 
                 return task
             })

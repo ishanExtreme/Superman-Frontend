@@ -150,3 +150,7 @@ export const deleteStage = (stage_id:number)=>{
     return request(`stage/${stage_id}`, 'DELETE', {}, false)
 }
 
+export const changeTaskStage = (task_id:number, stage:number)=>{
+    return request(`task/${task_id}/`, 'PATCH', {stage:stage}, false)
+}
+

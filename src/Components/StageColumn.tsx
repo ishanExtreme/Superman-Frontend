@@ -40,7 +40,7 @@ export default function StageColumn(props:{
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex space-x-2 justify-center">
                         <p className="text-xl font-semibold">{props.stage.title}</p>
-                        <span className="inline-block py-2 px-1.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-400 text-white rounded ml-2">7</span>
+                        <span className="inline-block py-2 px-1.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-400 text-white rounded ml-2">{props.tasks.length}</span>
                     </div>
                     {loading?
                     <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
