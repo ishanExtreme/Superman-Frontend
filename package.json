@@ -13,6 +13,7 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^18.0.1",
     "@types/react-lazy-load-image-component": "^1.5.2",
+    "framer-motion": "^6.3.3",
     "raviger": "^4.0.0",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

@@ -1,6 +1,23 @@
-import { Link } from "raviger";
 import React from "react";
+import CustomLink from "../Components/CustomLinks";
 import ImageElement from "../Components/ImageElement";
+import {primaryButton} from "../utils/colorPallete"
+import {motion, Repeat} from 'framer-motion'
+
+const repeatType: "loop" | "reverse" | "mirror" = "reverse"
+
+const imageVariant = {
+    hidden: { y:'-10px'},
+    visible: {
+      y:'10px',
+      transition: {
+        repeat: Infinity,
+        repeatType: repeatType,
+        duration: 1,
+      }
+    }
+  }
+
 
 export default function Home() {
 
@@ -8,29 +25,35 @@ export default function Home() {
         <div className="flex w-full items-center justify-center">
         <div>
             <div className="w-full flex items-center justify-center">
-                <ImageElement 
-                className="w-[250px]" 
-                src={process.env.PUBLIC_URL+" /images/logo/full_logo.svg"} 
-                alt="logo"
-                width="250px"
-                height="250px"
-                />
+                <motion.div
+                variants={imageVariant}
+                initial='hidden'
+                animate='visible' 
+                >
+                    <ImageElement 
+                    className="w-[200px] lg:w-[250px]" 
+                    src={process.env.PUBLIC_URL+" /images/logo/full_logo.svg"} 
+                    alt="logo"
+                    width="250px"
+                    height="250px"
+                    />
+                </motion.div>
             </div>
             <div className="mt-5 max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between bg-white shadow-lg p-5 rounded-2xl overflow-auto">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-1xl text-center font-extrabold tracking-tight text-gray-900 lg:text-4xl lg:text-left">
                 <span className="block">Ready to commit?</span>
                 <span className="block text-indigo-600 mr-5">Login or signup to manage your tasks</span>
             </h2>
-            <div className="pt-5 flex lg:mt-0 lg:flex-shrink-0">
+            <div className="pt-5 flex justify-center lg:mt-0 lg:flex-shrink-0">
                 <div className="inline-flex rounded-md shadow">
-                    <Link href="/login" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    <CustomLink location="/login" theme={primaryButton}>
                         Login
-                    </Link>
+                    </CustomLink>
                 </div>
                 <div className="ml-3 inline-flex rounded-md shadow">
-                    <Link href="/register" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                    Signup
-                    </Link>
+                    <CustomLink location="/register" theme={primaryButton}>
+                        Signup
+                    </CustomLink>
                 </div>
             </div>
             </div>
