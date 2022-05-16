@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { navigate } from "raviger";
 import React, { useEffect, useState } from "react";
 import { login } from "../api/apiSuper";
@@ -5,6 +6,22 @@ import FormField from "../Components/FormField";
 import ImageElement from "../Components/ImageElement";
 import { Error, User, UserLoginApi, validateUserLogin } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
+
+
+const repeatType: "loop" | "reverse" | "mirror" = "reverse"
+
+const imageVariant = {
+    hidden: { y:'-10px'},
+    visible: {
+      y:'10px',
+      transition: {
+        repeat: Infinity,
+        repeatType: repeatType,
+        duration: 1,
+      }
+    }
+  }
+
 
 export default function Signin(props:{user?:User}) {
 
@@ -73,7 +90,11 @@ export default function Signin(props:{user?:User}) {
    
     <div className="container px-6 py-12 h-full">
         <div className="flex flex-col justify-center items-center flex-wrap h-full g-6 text-gray-800">
-        <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+        <motion.div 
+        variants={imageVariant}
+        initial='hidden'
+        animate='visible' 
+        className="hidden lg:block md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
             <ImageElement
             src={process.env.PUBLIC_URL+" /images/logo/half_logo_2.svg"}
             className="w-full"
@@ -81,9 +102,12 @@ export default function Signin(props:{user?:User}) {
             width="500px"
             height="500px"
             />
-        </div>
+        </motion.div>
         <div className="md:w-8/12 lg:w-5/12 lg:ml-20 mt-5 p-5 mx-auto max-h-full bg-white shadow-lg rounded-xl">
-            <div className="flex items-center justify-center">
+            <motion.div 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ rotate: 180 }}
+            className="flex items-center justify-center">
                 <ImageElement 
                 src={process.env.PUBLIC_URL+" /images/logo/half_logo_1.svg"}
                 alt="Half Logo 1"
@@ -91,7 +115,7 @@ export default function Signin(props:{user?:User}) {
                 width="200px"
                 height="200px"
                 />
-            </div>
+            </motion.div>
             <form>
 
             <FormField id="1" label="Username" type="text" value={username} handleChangeCB={handleUsernameChange} />
@@ -104,18 +128,17 @@ export default function Signin(props:{user?:User}) {
                 <div className="form-group form-check">
                 <input
                     type="checkbox"
-                    className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-yellow-400 checked:border-yellow-400 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                    className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-alpha-400 checked:border-alpha-400 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                     id="exampleCheck3"
                 />
-                <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">
+                <label className="form-check-label inline-block text-secondary-600" htmlFor="exampleCheck2">
                     Remember me
                 </label>
                 </div>
                 <a
                 href="#!"
-                className="text-yellow-400 hover:text-yellow-500 focus:text-yellow-500 active:text-yellow-600 duration-200 transition ease-in-out"
-                >Forgot password?</a
-                >
+                className="text-secondary-600 hover:text-secondary-700 focus:text-secondary-700 active:text-secondary-800 duration-200 transition ease-in-out"
+                >Forgot password?</a>
             </div>
 
             {loading?
@@ -127,7 +150,7 @@ export default function Signin(props:{user?:User}) {
             :
             <button
                 type="submit"
-                className="mt-10 inline-block px-7 py-3 bg-yellow-400 text-red-700 font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out w-full"
+                className="mt-10 inline-block px-7 py-3 bg-alpha-400 text-secondary-600 font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 onClick={handleSubmit}

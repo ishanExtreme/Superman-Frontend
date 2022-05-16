@@ -1,8 +1,7 @@
 import React from "react";
 import CustomLink from "../Components/CustomLinks";
 import ImageElement from "../Components/ImageElement";
-import {primaryButton} from "../utils/colorPallete"
-import {motion, Repeat} from 'framer-motion'
+import {motion} from 'framer-motion'
 
 const repeatType: "loop" | "reverse" | "mirror" = "reverse"
 
@@ -42,16 +41,16 @@ export default function Home() {
             <div className="mt-5 max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between bg-white shadow-lg p-5 rounded-2xl overflow-auto">
             <h2 className="text-1xl text-center font-extrabold tracking-tight text-gray-900 lg:text-4xl lg:text-left">
                 <span className="block">Ready to commit?</span>
-                <span className="block text-indigo-600 mr-5">Login or signup to manage your tasks</span>
+                <span className="block text-primary-600 mr-5">Login or signup to manage your tasks</span>
             </h2>
             <div className="pt-5 flex justify-center lg:mt-0 lg:flex-shrink-0">
                 <div className="inline-flex rounded-md shadow">
-                    <CustomLink location="/login" theme={primaryButton}>
+                    <CustomLink location="/login" theme="default">
                         Login
                     </CustomLink>
                 </div>
                 <div className="ml-3 inline-flex rounded-md shadow">
-                    <CustomLink location="/register" theme={primaryButton}>
+                    <CustomLink location="/register" theme="default">
                         Signup
                     </CustomLink>
                 </div>
