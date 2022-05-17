@@ -1,6 +1,8 @@
 import React from "react";
 import { Task } from "../types/tasks";
 import ImageElement from "./ImageElement";
+import {CheckCircleIcon, ClockIcon} from '@heroicons/react/solid'
+
 
 const getDate = (date:string)=>{
 
@@ -30,38 +32,56 @@ export default function TaskListCardSemi(props:{
     }
 
     return (
-        <div className="w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
+        <>
+        {/* Small screen view */}
+        <div className="lg:hidden w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl">
+            <div className="flex flex-col gap-y-3">
+                <div className="flex flex-row gap-x-2 item-center justify-center ml-2">
+                    <p className="text-gray-500 font-semibold truncate">{props.task.title}</p>
+                    <div>{renderPriority(props.task.priority)}</div>
+                </div>
+                <p className="italic text-gray-500 text-center truncate">Stage set to {props.task.stage_name}</p>
+                {props.task.completed
+                ?
+                <div className="flex flex-row items-center justify-center gap-x-2">
+                    <p className="italic text-gray-500">Task completed</p>
+                    <CheckCircleIcon className="w-5 h-5 text-green-600" />
+                </div>
+                :
+                <div className="flex flex-row items-center justify-center gap-x-2">
+                    <p className="italic text-gray-500">Task Pending</p>
+                    <ClockIcon className="w-5 h-5 text-orange-400" />
+                </div>
+                }
+                <p className="italic text-gray-500 text-center">Created on {` ${getDate(props.task.created_date)}`}</p>
+                <p className="italic text-gray-500 text-center">Due on {` ${getDate(props.task.due_date)}`}</p>
+            </div>
+        </div>
+
+        {/* Large screen view */}
+        <div className="hidden lg:block w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
             <div className="grid grid-cols-6 gap-5">
                 <p className="text-gray-500 font-semibold">{props.task.title}</p>
                 <div>{renderPriority(props.task.priority)}</div>
+                <div className="flex items-center">
                 <p className="italic text-gray-500">Stage set to {props.task.stage_name}</p>
+                </div>
                 {props.task.completed
                 ?
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-500">Task completed</p>
-                    <ImageElement 
-                    className="w-5" 
-                    src={process.env.PUBLIC_URL + "/images/icons/tick.png"} 
-                    width="20px"
-                    height="20px"
-                    alt="tick"
-                    />
+                    <CheckCircleIcon className="w-5 h-5 text-green-600" />
                 </div>
                 :
                 <div className="flex flex-row items-center gap-x-2">
                     <p className="italic text-gray-500">Task Pending</p>
-                    <ImageElement 
-                    className="w-5" 
-                    src={process.env.PUBLIC_URL + "/images/icons/pending.png"}
-                    width="20px"
-                    height="20px"
-                    alt="pending"
-                    />
+                    <ClockIcon className="w-5 h-5 text-orange-400" />
                 </div>
                 }
                 <p className="italic text-gray-500">Created on {` ${getDate(props.task.created_date)}`}</p>
                 <p className="italic text-gray-500">Due on {` ${getDate(props.task.due_date)}`}</p>
             </div>
         </div>
+        </>
     );
 }

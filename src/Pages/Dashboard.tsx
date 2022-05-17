@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getCompleteTaskCount, getIncompleteTaskCount, taskList } from "../api/apiSuper";
-import Navbar from "../Components/Navbar";
 import NavbarResponsive from "../Components/NavbarResponsive";
 import NavPagesParent from "../Components/NavPagesParent";
 import SmallCard from "../Components/SmallCards";
@@ -157,18 +156,18 @@ export default function Dashboard(props:{currentUser:User}) {
         <NavbarResponsive user={props.currentUser} page="Home"/>
 
         <NavPagesParent loading={loading}>
-            <div className="flex flex-row justify-center gap-x-3">
-                <h2 className="text-[50px] font-semibold text-red-700">
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-x-3">
+                <h2 className="text-[25px] sm:text-[30px] lg:text-[50px] font-semibold text-red-700">
                     Super
                 </h2>
                 
-                <h2 className="text-[50px] font-semibold text-yellow-400">
+                <h2 className="text-[18px] sm:text-[25px] lg:text-[50px] font-semibold text-yellow-400">
                     Task Manager
                 </h2>
             </div>
-            <p className="mt-10 text-gray-500 text-xl">{getTodaysDate()}</p>
-            <p className="mt-3 text-2xl text-gray-600 font-semibold">Welcome To Your Dashboard, {` ${capitalize(props.currentUser?.username)}`}</p>
-            <div className="flex flex-row gap-x-10 mt-10">
+            <p className="mt-10 text-gray-500 text-lg lg:text-xl">{getTodaysDate()}</p>
+            <p className="mt-3 text-xl lg:text-2xl text-gray-600 font-semibold">Welcome To Your Dashboard, {` ${capitalize(props.currentUser?.username)}`}</p>
+            <div className="flex flex-row gap-x-10 mt-10 overflow-x-scroll hide-scroll-bar">
                 <SmallCard 
                 loading = {completeCountLoading}
                 title="Completed Tasks" 
