@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "../types/tasks";
-import ImageElement from "./ImageElement";
-import {CheckCircleIcon, ClockIcon} from '@heroicons/react/solid'
+import {motion} from 'framer-motion'
+import {CheckCircleIcon, ClockIcon, ArrowCircleRightIcon, ClipboardIcon} from '@heroicons/react/solid'
+import PreviewTask from "../ModalForms/PreviewTask";
 
 
 const getDate = (date:string)=>{
@@ -14,6 +15,12 @@ const getDate = (date:string)=>{
 export default function TaskListCardSemi(props:{
     task:Task
 }){
+
+    const [openPreview, setOpenPreview] = useState(false)
+
+    const toogleOpenPreview = (open:boolean)=>{
+        setOpenPreview(open)
+    }
 
     const renderPriority = (priority:number)=>{
 
@@ -33,6 +40,7 @@ export default function TaskListCardSemi(props:{
 
     return (
         <>
+        <PreviewTask open={openPreview} task={props.task} toogleOpen={toogleOpenPreview} />
         {/* Small screen view */}
         <div className="lg:hidden w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl">
             <div className="flex flex-col gap-y-3">
@@ -53,18 +61,30 @@ export default function TaskListCardSemi(props:{
                     <ClockIcon className="w-5 h-5 text-orange-400" />
                 </div>
                 }
-                <p className="italic text-gray-500 text-center">Created on {` ${getDate(props.task.created_date)}`}</p>
-                <p className="italic text-gray-500 text-center">Due on {` ${getDate(props.task.due_date)}`}</p>
+                
+                <div className="flex justify-center">
+                    <div>
+                        <button 
+                        onClick={()=>toogleOpenPreview(true)}
+                        type="button" className="flex items-center gap-x-2 px-6 pt-2.5 pb-2 bg-primary-600 text-white font-medium text-xs leading-normal uppercase rounded shadow-md">
+                        <ClipboardIcon className="w-5 h-5"/>
+                        View Task
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         {/* Large screen view */}
         <div className="hidden lg:block w-full p-4 px-10 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
-            <div className="grid grid-cols-6 gap-5">
-                <p className="text-gray-500 font-semibold">{props.task.title}</p>
-                <div>{renderPriority(props.task.priority)}</div>
+            <div className="grid grid-cols-7 gap-5">
                 <div className="flex items-center">
-                <p className="italic text-gray-500">Stage set to {props.task.stage_name}</p>
+                    <p className="text-gray-500 font-semibold">{props.task.title}</p>
+                </div>
+                <div className="flex items-center">{renderPriority(props.task.priority)}</div>
+                <div className="flex items-center">
+                    <p className="italic text-gray-500">Stage set to {props.task.stage_name}</p>
                 </div>
                 {props.task.completed
                 ?
@@ -78,8 +98,25 @@ export default function TaskListCardSemi(props:{
                     <ClockIcon className="w-5 h-5 text-orange-400" />
                 </div>
                 }
-                <p className="italic text-gray-500">Created on {` ${getDate(props.task.created_date)}`}</p>
-                <p className="italic text-gray-500">Due on {` ${getDate(props.task.due_date)}`}</p>
+                <div className="flex items-center">
+                    <p className="italic text-gray-500">Created on {` ${getDate(props.task.created_date)}`}</p>
+                </div>
+                <div className="flex items-center">
+                    <p className="italic text-gray-500">Due on {` ${getDate(props.task.due_date)}`}</p>
+                </div>
+                {/* view details button */}
+                <div className="col-end-9">
+                    <div className="flex items-center mb-1">
+                        <motion.button
+                        onClick={()=>toogleOpenPreview(true)} 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="button" 
+                        className="inline-block rounded-full leading-normal uppercase shadow-md w-8 h-8">
+                            <ArrowCircleRightIcon className="w-9 h-9 text-primary-600"/>
+                        </motion.button>
+                    </div>
+                </div>
             </div>
         </div>
         </>
