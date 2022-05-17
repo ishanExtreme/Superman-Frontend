@@ -124,7 +124,7 @@ export default function Signin(props:{user?:User}) {
             
 
     
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col gap-y-3 lg:flex-row justify-between items-center mb-6">
                 <div className="form-group form-check">
                 <input
                     type="checkbox"
@@ -143,7 +143,7 @@ export default function Signin(props:{user?:User}) {
 
             {loading?
             <div className="flex justify-center items-center">
-                <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                <div className="spinner-border text-alpha-400 animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
