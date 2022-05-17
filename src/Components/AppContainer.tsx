@@ -19,7 +19,7 @@ export default function AppContainer(props:{children:React.ReactNode}) {
             />
             <ToastContainer />
         
-        <div className="flex h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
+        <div className="h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
             {props.children}
         </div>
         </>

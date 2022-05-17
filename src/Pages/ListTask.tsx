@@ -9,6 +9,7 @@ import { taskList } from "../api/apiSuper";
 import CreateTask from "../ModalForms/CreateTask";
 import NavPagesParent from "../Components/NavPagesParent";
 import { triggerToast } from "../utils/notification";
+import NavbarResponsive from "../Components/NavbarResponsive";
 
 const filters = ["All", "Completed", "Pending"]
 
@@ -86,7 +87,9 @@ export default function ListTask(props:{currentUser:User}) {
 
     return (
         <>
-        <Navbar user={props.currentUser} page="Task" />
+        {/* <Navbar user={props.currentUser} page="Task" /> */}
+        <NavbarResponsive user={props.currentUser} page="Task"/>
+
         <CreateTask open={openCreate} toogleOpen={handleOpenCreate} />
             
 

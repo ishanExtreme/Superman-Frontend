@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getBoardsFiltered } from "../api/apiSuper";
 import BoardCard from "../Components/BoardCard";
 import Navbar from "../Components/Navbar";
+import NavbarResponsive from "../Components/NavbarResponsive";
 import NavPagesParent from "../Components/NavPagesParent";
 import SearchBar from "../Components/SearchBar";
 import CreateBoard from "../ModalForms/CreateBoard";
@@ -74,7 +75,9 @@ export default function BoardList(props:{currentUser:User}) {
 
     return (
         <>
-        <Navbar user={props.currentUser} page="Board" />
+        {/* <Navbar user={props.currentUser} page="Board" /> */}
+        <NavbarResponsive user={props.currentUser} page="Board"/>
+        
         <CreateBoard open={openCreate} toogleOpen={handleOpenCreateToogle} />
 
         <NavPagesParent loading={loading}>

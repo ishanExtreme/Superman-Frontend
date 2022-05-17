@@ -21,7 +21,7 @@ const imageVariant = {
 export default function Home() {
 
     return (
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full mt-[15rem] justify-center">
         <div>
             <div className="w-full flex items-center justify-center">
                 <motion.div

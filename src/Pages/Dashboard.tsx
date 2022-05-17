@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCompleteTaskCount, getIncompleteTaskCount, taskList } from "../api/apiSuper";
 import Navbar from "../Components/Navbar";
+import NavbarResponsive from "../Components/NavbarResponsive";
 import NavPagesParent from "../Components/NavPagesParent";
 import SmallCard from "../Components/SmallCards";
 import TaskListCardSemi from "../Components/TaskListCardSemi";
@@ -152,7 +153,8 @@ export default function Dashboard(props:{currentUser:User}) {
 
     return (
         <>
-        <Navbar user={props.currentUser} page="Home" />
+        {/* <Navbar user={props.currentUser} page="Home" /> */}
+        <NavbarResponsive user={props.currentUser} page="Home"/>
 
         <NavPagesParent loading={loading}>
             <div className="flex flex-row justify-center gap-x-3">

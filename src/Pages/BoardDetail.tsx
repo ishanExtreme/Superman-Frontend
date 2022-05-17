@@ -14,6 +14,7 @@ import { Board, Task } from "../types/tasks";
 import { triggerToast } from "../utils/notification";
 import {DragDropContext, DropResult} from 'react-beautiful-dnd';
 import StageColumn from "../Components/StageColumn";
+import NavbarResponsive from "../Components/NavbarResponsive";
 
 
 const capitalize = (word:string|undefined)=>{
@@ -223,7 +224,8 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
 
     return (
        <>
-       <Navbar user={props.currentUser} page="Board" />
+       {/* <Navbar user={props.currentUser} page="Board" /> */}
+       <NavbarResponsive user={props.currentUser} page="Board"/>
 
        <NavPagesParent loading={loading}>
             {board === null?
