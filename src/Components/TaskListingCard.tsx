@@ -5,6 +5,9 @@ import EditTask from "../ModalForms/EditTask";
 import PreviewTask from "../ModalForms/PreviewTask";
 import ImageElement from "./ImageElement";
 
+import {motion} from 'framer-motion'
+import {EyeIcon, PencilAltIcon, TrashIcon} from '@heroicons/react/outline'
+
 export default function TaskListingCard(props:{task:Task}) {
 
     const [loading, setLoading] = useState("")
@@ -79,6 +82,7 @@ export default function TaskListingCard(props:{task:Task}) {
         <EditTask open={editOpen} toogleOpen={toogleEditOpen} task={props.task} />
         <PreviewTask open={previewOpen} toogleOpen={tooglePreviewOpen} task={props.task} />
         
+        {/* Large screen */}
         <div className="flex flex-row items-center p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
             {loading === "edit"?
             <div className="mr-5 spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
@@ -104,27 +108,25 @@ export default function TaskListingCard(props:{task:Task}) {
 
                 <div className="grid grid-cols-3">
                     <div>
-                        <button onClick={()=>tooglePreviewOpen(true)} type="button" className="inline-block shadow-md w-9 h-9">
-                            <ImageElement 
-                            src={process.env.PUBLIC_URL + "/images/icons/prev.png"} 
-                            alt="preview"
-                            className=""
-                            width="50px"
-                            height="50px"
-                            />
-                        </button>
+                        <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={()=>tooglePreviewOpen(true)} 
+                        type="button" 
+                        className="flex items-center w-9 h-9">
+                            <EyeIcon className="w-9 h-9 text-green-500"/>
+                        </motion.button>
                     </div>
 
                     <div>
-                        <button onClick={()=>toogleEditOpen(true)} type="button" className="inline-block shadow-md w-9 h-9">
-                                <ImageElement 
-                                src={process.env.PUBLIC_URL + "/images/icons/edit.png"} 
-                                alt="edit"
-                                className=""
-                                height="50px"
-                                width="50px"
-                                />
-                        </button>
+                        <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={()=>toogleEditOpen(true)} 
+                        type="button" 
+                        className="flex items-center w-9 h-9">
+                            <PencilAltIcon className="w-9 h-9 text-alpha-400"/>
+                        </motion.button>
                     </div>
 
                     <div>
@@ -133,15 +135,14 @@ export default function TaskListingCard(props:{task:Task}) {
                             <span className="visually-hidden">Loading...</span>
                         </div>
                         :
-                        <button type="button" className="inline-block shadow-md w-9 h-9" onClick={deleteTaskCall}>
-                            <ImageElement 
-                            src={process.env.PUBLIC_URL + "/images/icons/del.png"} 
-                            alt="delete"
-                            className=""
-                            height="50px"
-                            width="50px"
-                            />
-                        </button>
+                        <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="button" 
+                        className="flex items-center w-9 h-9"
+                        onClick={deleteTaskCall}>
+                            <TrashIcon className="w-9 h-9 text-red-500"/>
+                        </motion.button>
                         }
                     </div>
                 </div>

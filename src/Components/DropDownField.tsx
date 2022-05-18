@@ -21,7 +21,7 @@ export default function DropDownField(
 
     <div className="dropdown relative">
       <button
-        className="dropdown-toggle px-6 py-2.5 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:red-blue-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap"
+        className="dropdown-toggle px-6 py-2.5 bg-beta-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-beta-800 hover:shadow-lg focus:beta-blue-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-beta-900 active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap"
         type="button"
         id="dropdownMenuButton1"
         data-bs-toggle="dropdown"
@@ -46,13 +46,13 @@ export default function DropDownField(
         </svg>
       </button>
       <ul
-        className="dropdown-menu min-w-max max-h-[10rem] absolute bg-yellow-400 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none overflow-auto"
+        className="dropdown-menu min-w-max max-h-[10rem] absolute bg-alpha-400 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none overflow-auto"
         aria-labelledby="dropdownMenuButton1"
       >
         {props.options.map((option, index)=>(
             <li key={index}>
                 <button
-                className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white hover:bg-red-700"
+                className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-secondary-600 hover:bg-beta-700 hover:text-white"
                 onClick={()=>handleSelectUtil(option)}
                 >
                     {option}

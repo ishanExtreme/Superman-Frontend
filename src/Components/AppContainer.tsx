@@ -17,7 +17,6 @@ export default function AppContainer(props:{children:React.ReactNode}) {
             draggable
             pauseOnHover
             />
-            <ToastContainer />
         
         <div className="h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
             {props.children}

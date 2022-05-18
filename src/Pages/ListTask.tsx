@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Components/Navbar";
 import { User } from "../types/api/user";
 import DropDownField from "../Components/DropDownField";
 import FormField from "../Components/FormField";
@@ -10,6 +9,8 @@ import CreateTask from "../ModalForms/CreateTask";
 import NavPagesParent from "../Components/NavPagesParent";
 import { triggerToast } from "../utils/notification";
 import NavbarResponsive from "../Components/NavbarResponsive";
+import {PlusCircleIcon} from '@heroicons/react/outline'
+import {motion} from 'framer-motion'
 
 const filters = ["All", "Completed", "Pending"]
 
@@ -98,23 +99,23 @@ export default function ListTask(props:{currentUser:User}) {
 
         <NavPagesParent loading={loading}>
         
-            <h2 className="text-center text-[50px] font-semibold text-red-700">All Tasks</h2>
+            <h2 className="text-center text-[25px] sm:text-[30px] lg:text-[50px] font-semibold text-beta-700">All Tasks</h2>
 
             {/* Filter section */}
-            <div className="grid grid-cols-2 mt-[50px]">
-                <div className="flex flex-row col-start-1 gap-x-[100px]"> 
-                    <div className="inline-flex pt-3">
+            <div className="flex flex-col justify-center lg:grid lg:grid-cols-2 mt-[50px]">
+                <div className="flex flex-col justify-center gap-y-3 lg:flex-row lg:col-start-1 lg:gap-x-[100px]"> 
+                    <div className="inline-flex justify-center pt-3">
                         <DropDownField label="Filter" options={filters} handleSelectCB={handleFilterSelect}/>
                     </div>    
-                    <FormField label="Date" id="1" type="date" value={date} handleChangeCB={handleDateChange} />
-                    
+                    <FormField label="Date" id="1" type="date" value={date} handleChangeCB={handleDateChange} />       
                 </div>
-                <div className="flex flex-row justify-end col-start-2 gap-x-[100px]">
+
+                <div className="flex flex-col mb-3 justify-center lg:flex-row lg:justify-end lg:col-start-2 lg:gap-x-[100px]">
                     <FormField label="Search" id="2" type="text" value={search} handleChangeCB={handleSearchChange} />
-                    <div className="inline-flex pt-2">
+                    <div className="inline-flex justify-center pt-2">
                         <div>
-                            <button onClick={()=>handleOpenCreate(true)} type="button" className="px-6 pt-2.5 pb-2 bg-red-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
-                            <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" alt="Add"/>
+                            <button onClick={()=>handleOpenCreate(true)} type="button" className="px-6 pt-2.5 pb-2 bg-beta-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-beta-800 hover:shadow-lg focus:bg-beta-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-beta-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
+                            <PlusCircleIcon className="h-5 w-5 mr-2" />
                             Create Task
                             </button>
                         </div>
@@ -123,13 +124,23 @@ export default function ListTask(props:{currentUser:User}) {
             </div>
 
             <div className="flex flex-row justify-center gap-x-5">
-                <button onClick={handleModify} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
+                <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={handleModify} 
+                type="button" 
+                className="inline-block px-6 py-2.5 bg-yellow-400 text-secondary-600 font-medium text-xs leading-tight uppercase rounded shadow-md">
                     Modify Result
-                </button>
+                </motion.button>
 
-                <button onClick={handleClearFilter} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
+                <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={handleClearFilter} 
+                type="button" 
+                className="inline-block px-6 py-2.5 bg-yellow-400 text-secondary-600 font-medium text-xs leading-tight uppercase rounded shadow-md">
                     Clear Filters
-                </button>
+                </motion.button>
             </div>
 
             <div className="flex flex-col mt-10 gap-y-5">
