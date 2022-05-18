@@ -7,28 +7,13 @@ import ImageElement from "./ImageElement";
 
 import {motion} from 'framer-motion'
 import {EyeIcon, PencilAltIcon, TrashIcon} from '@heroicons/react/outline'
+import PriorityBadges from "./PriorityBadges";
 
 export default function TaskListingCard(props:{task:Task}) {
 
     const [loading, setLoading] = useState("")
     const [editOpen, setEditOpen] = useState(false)
     const [previewOpen, setPreviewOpen] = useState(false)
-
-    const renderPriority = (priority:number)=>{
-
-        if(priority > 6)
-            return (
-                <span className={getClasses("text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full")}>Low</span>
-            )
-        else if(priority > 3 && priority <= 6)
-            return (
-                <span className={getClasses("text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full")}>Medium</span>
-            )
-        else
-            return (
-                <span className={getClasses("text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-600 text-white rounded-full")}>High</span>
-            )
-    }
 
     const getClasses = (className:string)=>{
 
@@ -103,7 +88,11 @@ export default function TaskListingCard(props:{task:Task}) {
                     <p className={getClasses("text-sm text-gray-500")}>{props.task.description}</p>
                 </div>
                 <div className="flex items-center justify-start">
-                    {renderPriority(props.task.priority)}
+                    <PriorityBadges 
+                    priority={props.task.priority} 
+                    completed={props.task.completed}
+                    applyStyling={false}
+                    />
                 </div>
 
                 <div className="grid grid-cols-3">

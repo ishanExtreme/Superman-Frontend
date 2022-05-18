@@ -3,6 +3,7 @@ import { Task } from "../types/tasks";
 import {motion} from 'framer-motion'
 import {CheckCircleIcon, ClockIcon, ArrowCircleRightIcon, ClipboardIcon} from '@heroicons/react/solid'
 import PreviewTask from "../ModalForms/PreviewTask";
+import PriorityBadges from "./PriorityBadges";
 
 
 const getDate = (date:string)=>{
@@ -22,22 +23,6 @@ export default function TaskListCardSemi(props:{
         setOpenPreview(open)
     }
 
-    const renderPriority = (priority:number)=>{
-
-        if(priority > 6)
-            return (
-                <span className={"text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full"}>Low</span>
-            )
-        else if(priority > 3 && priority <= 6)
-            return (
-                <span className={"text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full"}>Medium</span>
-            )
-        else
-            return (
-                <span className={"text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-600 text-white rounded-full"}>High</span>
-            )
-    }
-
     return (
         <>
         <PreviewTask open={openPreview} task={props.task} toogleOpen={toogleOpenPreview} />
@@ -46,7 +31,13 @@ export default function TaskListCardSemi(props:{
             <div className="flex flex-col gap-y-3">
                 <div className="flex flex-row gap-x-2 item-center justify-center ml-2">
                     <p className="text-gray-500 font-semibold truncate">{props.task.title}</p>
-                    <div>{renderPriority(props.task.priority)}</div>
+                    <div>
+                        <PriorityBadges 
+                        priority={props.task.priority} 
+                        completed={props.task.completed}
+                        applyStyling={false}
+                        />
+                    </div>
                 </div>
                 <p className="italic text-gray-500 text-center truncate">Stage set to {props.task.stage_name}</p>
                 {props.task.completed
@@ -82,7 +73,13 @@ export default function TaskListCardSemi(props:{
                 <div className="flex items-center">
                     <p className="text-gray-500 font-semibold">{props.task.title}</p>
                 </div>
-                <div className="flex items-center">{renderPriority(props.task.priority)}</div>
+                <div className="flex items-center">
+                    <PriorityBadges 
+                    priority={props.task.priority} 
+                    completed={props.task.completed}
+                    applyStyling={false}
+                    />
+                </div>
                 <div className="flex items-center">
                     <p className="italic text-gray-500">Stage set to {props.task.stage_name}</p>
                 </div>
