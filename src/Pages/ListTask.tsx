@@ -11,6 +11,7 @@ import { triggerToast } from "../utils/notification";
 import NavbarResponsive from "../Components/NavbarResponsive";
 import {PlusCircleIcon} from '@heroicons/react/outline'
 import {motion} from 'framer-motion'
+import DropDownSelect from "../Components/DropdownSelect";
 
 const filters = ["All", "Completed", "Pending"]
 
@@ -48,7 +49,7 @@ const getTasks = async (
 
 export default function ListTask(props:{currentUser:User}) {
 
-    const [filter, setFilter] = useState("");
+    const [filter, setFilter] = useState("All");
     const [date, setDate] = useState("");
     const [search, setSearch] = useState("");
     const [tasks, setTask] = useState<Task[]>([] as Task[])
@@ -79,6 +80,8 @@ export default function ListTask(props:{currentUser:User}) {
     const handleClearFilter = async ()=>{
         await getTasks(setLoading, setTask, "", "", "")
         setDate("")
+        setFilter("All")
+        setSearch("")
         triggerToast("info", "Filters Cleared")
     }
 
@@ -105,7 +108,7 @@ export default function ListTask(props:{currentUser:User}) {
             <div className="flex flex-col justify-center lg:grid lg:grid-cols-2 mt-[50px]">
                 <div className="flex flex-col justify-center gap-y-3 lg:flex-row lg:col-start-1 lg:gap-x-[100px]"> 
                     <div className="inline-flex justify-center pt-3">
-                        <DropDownField label="Filter" options={filters} handleSelectCB={handleFilterSelect}/>
+                        <DropDownSelect label={filter} options={filters} handleSelectCB={handleFilterSelect}/>
                     </div>    
                     <FormField label="Date" id="1" type="date" value={date} handleChangeCB={handleDateChange} />       
                 </div>
