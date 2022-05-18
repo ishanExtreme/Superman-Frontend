@@ -146,7 +146,7 @@ export default function ListTask(props:{currentUser:User}) {
                 </motion.button>
             </div>
 
-            <div className="flex flex-col mt-10 gap-y-5">
+            <div className="flex flex-row flex-wrap justify-center md:justify-between lg:flex-col mt-10 gap-y-5 gap-x-5">
                 {tasks.length === 0?
                 <div className="mt-10 flex flex-row justify-center p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto">
                     <p>Nothing Found</p>
