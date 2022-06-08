@@ -1,7 +1,42 @@
-# Getting Started with Create React App
+<h1 align="center">
+  Super Task Manager
+</h1>
 
+<h3 align="center">
+  A superman for managing all your tasks
+</h3>
+<p align="center">
+<a>
+    <img style="width:200px" src="./public/images/logo/full_logo.svg"/>
+</a>
+</p>
+<br/>
+<br/>
+
+[Website Link](https://superman-lite.netlify.app/)
+
+
+### 💡 Idea
+> Goal is to develop a taskmanager which you can use at any device and in any style you like, whether on terminal, using whatsapp, website or a mobile application. So you can manage all your tasks at one place and in a style which suits you best.
+
+### 🤔 How To Start Using??
+> Simply create an account, create a new board and start adding tasks to it.
+
+[Website](https://superman-lite.netlify.app/)
+
+### ✨ Current Features
+> 1. Responsive Design to support all devices.
+> 2. Board feature to devide tasks into different categories.
+> 3. Drag & Drop to change task category
+> 4. Kanban-style workflow.
+
+### 🧑‍💻 Tech Stack Used
+> 1. Front End: front end is made using **React(TypeScript)** and **Tailwind**  and **Framer Motion** for animation.
+> 2. Back End: back end is REST based using **Django** with **Django Rest Framework Library** and **Postgresql** for database.
+> 4. Cloud Service: **Heroku** for backend and **Netlify** for frontend
+
+### 🚀 Running Locally
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -39,8 +74,15 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🤝 Contributing
+> Contributions, issues and features requests are welcome!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### ⚠️ License
+> GNU General Public License v3.0 or later <br/>
+> See [COPYING](https://github.com/ishanExtreme/Truth_Dare/blob/master/COPYING.txt) to see the full text.
+
+<h2 align='center'>
+  Do star ⭐ the repo if you like the project
+</h2>
+
