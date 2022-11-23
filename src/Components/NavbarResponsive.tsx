@@ -18,7 +18,7 @@ export default function NavbarResponsive(props:{user:User, page:string}) {
     }
 
     return (
-    <nav className="relative w-full flex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light">
+    <nav className="sticky top-0 z-50 w-full flex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light">
         <div className="container-fluid w-full flex flex-row flex-wrap items-center justify-between px-6">
             <button className="navbar-toggler text-gray-500 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline " 
             type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

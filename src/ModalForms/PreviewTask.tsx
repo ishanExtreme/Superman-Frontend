@@ -1,7 +1,7 @@
 import React from "react";
 import { Task } from "../types/tasks";
 import ModalParent from '../Components/ModalParent'
-import ImageElement from "../Components/ImageElement";
+import { CheckCircleIcon, ClockIcon } from "@heroicons/react/solid";
 
 const getDate = (date:string)=>{
 
@@ -39,34 +39,24 @@ export default function PreviewTask(props:{
                 <div>
                 {renderPriority(props.task.priority)}
                 </div>
-                <p className="italic text-gray-200">{props.task.description}</p>
-                <p className="italic text-gray-200">Task's priority is{` ${props.task.priority}`}</p>
+               
+                <p className="break-words italic text-gray-600">{props.task.description}</p>
+                
+                <p className="italic text-gray-600">Task's priority is{` ${props.task.priority}`}</p>
                 {props.task.completed?
                 <div className="flex flex-row items-center gap-x-2">
-                    <p className="italic text-gray-200">Task completed</p>
-                    <ImageElement 
-                    className="w-5" 
-                    src={process.env.PUBLIC_URL + "/images/icons/tick.png"} 
-                    alt="tick"
-                    height="20px"
-                    width="20px"
-                    />
+                    <p className="italic text-gray-600">Task completed</p>
+                    <CheckCircleIcon className="w-5 h-5 text-green-600" />
                 </div>
                 :
                 <div className="flex flex-row items-center gap-x-2">
-                    <p className="italic text-gray-200">Task Pending</p>
-                    <ImageElement 
-                    className="w-5" 
-                    src={process.env.PUBLIC_URL + "/images/icons/pending.png"} 
-                    alt="tick"
-                    height="20px"
-                    width="20px"
-                    />
+                    <p className="italic text-gray-600">Task Pending</p>
+                    <ClockIcon className="w-5 h-5 text-orange-400" />
                 </div>
                 }
-                <p className="italic text-gray-200">Task's Stage is {` ${props.task.stage_name}`}</p>
-                <p className="italic text-gray-200">Task Created on {` ${getDate(props.task.created_date)}`}</p>
-                <p className="italic text-gray-200">Task Due on {` ${getDate(props.task.due_date)}`}</p>
+                <p className="italic text-gray-600">Task's Stage is {` ${props.task.stage_name}`}</p>
+                <p className="italic text-gray-600">Task Created on {` ${getDate(props.task.created_date)}`}</p>
+                <p className="italic text-gray-600">Task Due on {` ${getDate(props.task.due_date)}`}</p>
             </div>
         </ModalParent>
     );

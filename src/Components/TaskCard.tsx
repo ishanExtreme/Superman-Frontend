@@ -130,7 +130,7 @@ export default function TaskCard(props:{task:Task, index:number}) {
                 </div>
                 {/* Title ends */}
 
-                <p className={getClasses("text-sm text-gray-800")}>{props.task.description}</p>
+                <p className={getClasses("text-sm text-gray-800 truncate")}>{props.task.description}</p>
             </div>
             )}
         </Draggable>
