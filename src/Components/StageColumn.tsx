@@ -5,6 +5,7 @@ import { Task } from "../types/tasks";
 import ImageElement from "./ImageElement";
 import TaskCard from "./TaskCard";
 import {Droppable} from 'react-beautiful-dnd'
+import { TrashIcon } from "@heroicons/react/outline";
 
 export default function StageColumn(props:{
     stage:StageApi
@@ -36,7 +37,7 @@ export default function StageColumn(props:{
             <div 
             ref={provided.innerRef}
             {...provided.droppableProps} 
-            className="p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-auto w-[400px] h-[700px]">
+            className="p-4 mx-auto bg-white shadow-lg rounded-2xl overflow-y-auto min-w-[400px] h-[700px]">
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex space-x-2 justify-center">
                         <p className="text-xl font-semibold">{props.stage.title}</p>
@@ -47,15 +48,9 @@ export default function StageColumn(props:{
                         <span className="visually-hidden">Loading...</span>
                     </div>
                     :
-                    <button type="button" className="inline-block shadow-md w-9 h-9" onClick={handleDelete}>
-                        <ImageElement 
-                        src={process.env.PUBLIC_URL + "/images/icons/del.png"} 
-                        alt="delete"
-                        className=""
-                        height="50px"
-                        width="50px"
-                        />
-                    </button>
+                    
+                    <TrashIcon onClick={handleDelete} className="w-8 h-8 cursor-pointer text-beta-700"/>
+                   
                     }
                 </div>
                 <hr className="mt-5 border-gray-500"/>

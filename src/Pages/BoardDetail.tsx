@@ -15,6 +15,7 @@ import { triggerToast } from "../utils/notification";
 import {DragDropContext, DropResult} from 'react-beautiful-dnd';
 import StageColumn from "../Components/StageColumn";
 import NavbarResponsive from "../Components/NavbarResponsive";
+import { PencilIcon, PlusCircleIcon } from "@heroicons/react/outline";
 
 
 const capitalize = (word:string|undefined)=>{
@@ -238,33 +239,26 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
             <CreateTask open={openCreate} toogleOpen={openCreateToogle} />
             <CreateStage open={openStageCreate} toogleOpen={openStageCreateToogle} boardId={board.id} />
             <h2 className="text-center text-[50px] font-semibold text-red-700">Board</h2>
-            <div className="flex flex-row gap-x-5 items-center">
-                <p className="mt-3 text-2xl text-black font-bold">{capitalize(board.title)}</p>
-                <button onClick={()=>openEditToogle(true)} type="button" className="mt-2 inline-block shadow-md w-7 h-7">
-                    <ImageElement 
-                    src={process.env.PUBLIC_URL + "/images/icons/edit.png"} 
-                    alt="edit"
-                    className="w-[30px]"
-                    height="30px"
-                    width="30px"
-                    />
-                </button>
+            <div className="flex flex-row gap-x-2 items-center">
+                <p className="text-2xl text-black font-bold">{capitalize(board.title)}</p>
+                   <PencilIcon onClick={()=>openEditToogle(true)} className="w-6 h-6 cursor-pointer text-alpha-400" />
+                
             </div>
 
             {/* Filter section */}
-            <div className="grid grid-cols-2 mt-[50px]">
-                <div className="flex flex-row col-start-1 gap-x-[100px]"> 
+            <div className="flex flex-col lg:grid lg:grid-cols-2 mt-[50px]">
+                <div className="flex flex-col items-center gap-y-3 lg:flex lg:flex-row lg:col-start-1 lg:items-start lg:gap-x-[100px]"> 
                     <div className="inline-flex pt-3">
                         <DropDownField label="Filter Stage" options={getStageTitle()} handleSelectCB={handleFilterSelect}/>
                     </div>    
                     <FormField label="Date" id="1" type="date" value={date} handleChangeCB={handleDateChange} />
                     
                 </div>
-                <div className="flex flex-row justify-end col-start-2 gap-x-[100px]">
+                <div className="flex flex-col gap-y-3 items-center lg:flex lg:flex-row lg:justify-end lg:items-start lg:col-start-2 lg:gap-x-[100px]">
                     <div className="inline-flex pt-2">
                         <div>
                             <button onClick={()=>openStageCreateToogle(true)} type="button" className="px-6 pt-2.5 pb-2 bg-red-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
-                            <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" alt="Add"/>
+                            <PlusCircleIcon className="h-5 w-5 mr-2" />
                             Add Stage
                             </button>
                         </div>
@@ -273,7 +267,7 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
                     <div className="inline-flex pt-2">
                         <div>
                             <button onClick={()=>openCreateToogle(true)} type="button" className="px-6 pt-2.5 pb-2 bg-red-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
-                            <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" alt="Add"/>
+                            <PlusCircleIcon className="h-5 w-5 mr-2" />
                             Create Task
                             </button>
                         </div>
@@ -281,7 +275,7 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
                 </div>
             </div>
 
-            <div className="flex flex-row justify-center gap-x-5">
+            <div className="flex flex-row justify-center gap-x-5 mt-3">
                 <button onClick={modifyResult} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
                     Modify Result
                 </button>
@@ -296,7 +290,7 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
                 <p>Nothing Found</p>
             </div>
             :
-            <div className="grid grid-cols-3 mt-10 gap-y-3">
+            <div className="flex flex-row overflow-x-auto gap-x-3 lg:grid lg:grid-cols-3 mt-10 lg:gap-y-3">
                 <DragDropContext onDragEnd={onDragEnd}>
                     {stages.map((stage, index)=>{
                         
