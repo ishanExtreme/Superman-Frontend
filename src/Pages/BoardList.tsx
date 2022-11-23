@@ -6,7 +6,7 @@ import NavbarResponsive from "../Components/NavbarResponsive";
 import NavPagesParent from "../Components/NavPagesParent";
 import SearchBar from "../Components/SearchBar";
 import CreateBoard from "../ModalForms/CreateBoard";
-import EditBoard from "../ModalForms/EditBoard";
+import {PlusCircleIcon} from '@heroicons/react/outline'
 import { User } from "../types/api/user";
 import { Board } from "../types/tasks";
 import { triggerToast } from "../utils/notification";
@@ -83,18 +83,18 @@ export default function BoardList(props:{currentUser:User}) {
         <NavPagesParent loading={loading}>
             <h2 className="text-center text-[50px] font-semibold text-red-700">All Boards</h2>
             {/* Filter section */}
-            <div className="grid grid-cols-2 mt-[50px]">
+            <div className="flex flex-col items-center lg:grid lg:grid-cols-2 mt-[50px]">
                 <div className="flex items-start">
                     <SearchBar value={search} handleChangeCB={handleSearchChange} handleClickCB={modifyResult} />
                 </div>
                 <div className="flex justify-end">
                     <button onClick={()=>handleOpenCreateToogle(true)} type="button" className="h-10 px-6 pt-2.5 pb-2 bg-red-700 text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out flex align-center items-center">
-                        <img src={process.env.PUBLIC_URL + "/images/icons/add.png"} className="mr-2" alt="Add"/>
+                        <PlusCircleIcon className="h-5 w-5 mr-2" />
                         Create Board
                     </button>
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-3">
                 <button onClick={handleClearFilter} type="button" className="inline-block px-6 py-2.5 bg-yellow-400 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yello-500 hover:shadow-lg focus:bg-yellow-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-600 active:shadow-lg transition duration-150 ease-in-out">
                     Clear Filters
                 </button>
@@ -104,7 +104,7 @@ export default function BoardList(props:{currentUser:User}) {
                     <p>Nothing Found</p>
                 </div>
                 :
-                <div className="mt-5 grid grid-cols-3 gap-x-3 gap-y-3">
+                <div className="mt-5 flex flex-row flex-wrap gap-x-3 gap-y-3">
                     {boards.map((board)=>(
                     <BoardCard 
                     key={board.id}
