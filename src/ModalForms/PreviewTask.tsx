@@ -45,7 +45,7 @@ export default function PreviewTask(props:{
                 <p className="italic text-gray-600">Task's priority is{` ${props.task.priority}`}</p>
                 {props.task.completed?
                 <div className="flex flex-row items-center gap-x-2">
-                    <p className="italic text-gray-200">Task completed</p>
+                    <p className="italic text-gray-600">Task completed</p>
                     <CheckCircleIcon className="w-5 h-5 text-green-600" />
                 </div>
                 :
