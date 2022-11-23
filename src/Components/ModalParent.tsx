@@ -17,7 +17,7 @@ export default function CreateForm(props:{
 
     return (
         <Transition.Root show={props.open} as={Fragment}>
-          <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={()=>props.toogleOpen(false)}>
+          <Dialog as="div" className="fixed z-10 inset-0 top-20 overflow-y-auto" initialFocus={cancelButtonRef} onClose={()=>props.toogleOpen(false)}>
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
               <Transition.Child
                 as={Fragment}
@@ -45,7 +45,7 @@ export default function CreateForm(props:{
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <div className="w-screen border-2 border-beta-700 relative p-3 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                         <Dialog.Title as="h3" className="text-lg font-semibold leading-6 text-center mb-5 text-yellow-400">
                           {props.title}
                         </Dialog.Title>
