@@ -9,6 +9,7 @@ import Dashboard from '../Pages/Dashboard';
 import ListTask from '../Pages/ListTask';
 import BoardList from '../Pages/BoardList';
 import BoardDetail from '../Pages/BoardDetail';
+import ChangePass from '../Pages/ChangePass';
 
 const Privateroutes = {
     '/': ()=> <Home /> ,
@@ -21,7 +22,8 @@ const Privateroutes = {
     <BoardDetail 
     boardId={Number(id)}
     currentUser={user?user:null}
-    />
+    />,
+    '/change-password': ({user}:{user?:User})=><ChangePass currentUser={user?user:null}/>
 }
 
 export default function AppRouterPrivate(props:{currentUser:User}) {
