@@ -2,7 +2,7 @@ import { BoardCreateApi, StageCreateApi, TaskCreateApi } from "../types/api/task
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
-const API_BASE_URL = " https://superman-api.herokuapp.com/api/"
+const API_BASE_URL = "http://127.0.0.1:8000/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
@@ -152,5 +152,17 @@ export const deleteStage = (stage_id:number)=>{
 
 export const changeTaskStage = (task_id:number, stage:number)=>{
     return request(`task/${task_id}/`, 'PATCH', {stage:stage}, false)
+}
+
+export const changePassword = (old_password:string, new_password:string)=>{
+    return request("change-password/", "PATCH", {old_password:old_password, new_password:new_password}, false)
+}
+
+export const passwordResetSendEmail = (email:string)=>{
+    return request("password-reset/", "POST", {email:email}, false)
+}
+
+export const passwordResetConfirm = (token:string, password:string)=>{
+    return request("password-reset/confirm/", "POST", {token:token, password:password}, false)
 }
 

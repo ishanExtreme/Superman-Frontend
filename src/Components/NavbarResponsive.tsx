@@ -50,7 +50,7 @@ export default function NavbarResponsive(props:{user:User, page:string}) {
                     </a>
                     <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0 " aria-labelledby="dropdownMenuButton2">
                     <li>
-                        <a className="flex items-center gap-x-1 dropdown-item text-sm py-2 px-4 font-normal w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100 " href="#">
+                        <a className="flex items-center gap-x-1 dropdown-item text-sm py-2 px-4 font-normal w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100 " href="/change-password">
                             <UserIcon className="h-4 w-4 text-purple-500"/>
                             Profile
                         </a>

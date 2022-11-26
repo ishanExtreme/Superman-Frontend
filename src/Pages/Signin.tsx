@@ -136,7 +136,7 @@ export default function Signin(props:{user?:User}) {
                 </label>
                 </div>
                 <a
-                href="#!"
+                href="/password-reset"
                 className="text-secondary-600 hover:text-secondary-700 focus:text-secondary-700 active:text-secondary-800 duration-200 transition ease-in-out"
                 >Forgot password?</a>
             </div>
