@@ -156,7 +156,16 @@ export default function Register(props:{user?:User}) {
             >
                 Register
             </button>
-            }   
+            }
+
+            <button
+                className="mt-3 inline-block px-7 py-3 bg-beta-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-beta-800 hover:shadow-lg focus:bg-beta-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-beta-900 active:shadow-lg transition duration-150 ease-in-out w-full"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="light"
+                onClick={()=>navigate("/login")}
+            >
+                Switch to Login
+            </button>   
 
 
             {Object.keys(error).length !== 0 && <p className='text-red-500 text-center mt-10'>{error.password} <br/> {error.username} <br/> {error.email}</p>}
