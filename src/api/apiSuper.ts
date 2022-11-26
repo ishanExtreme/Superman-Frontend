@@ -158,3 +158,11 @@ export const changePassword = (old_password:string, new_password:string)=>{
     return request("change-password/", "PATCH", {old_password:old_password, new_password:new_password}, false)
 }
 
+export const passwordResetSendEmail = (email:string)=>{
+    return request("password-reset/", "POST", {email:email}, false)
+}
+
+export const passwordResetConfirm = (token:string, password:string)=>{
+    return request("password-reset/confirm/", "POST", {token:token, password:password}, false)
+}
+
