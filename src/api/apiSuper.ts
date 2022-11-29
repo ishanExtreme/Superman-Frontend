@@ -94,6 +94,10 @@ export const taskList = (filters:any)=>{
     return request('task', 'GET', filters)
 }
 
+export const tasksofBoard = (board_id:number, filters:any)=>{
+    return request(`board/${board_id}/task`, 'GET', filters)
+}
+
 export const stagesOfBoard = (board_id:number)=>{
     return request(`board/${board_id}/stage`, 'GET')
 }
