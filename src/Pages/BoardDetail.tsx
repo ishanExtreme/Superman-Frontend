@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { changeTaskStage, getBoard, stagesOfBoard, tasksofBoard } from "../api/apiSuper";
 import DropDownField from "../Components/DropDownField";
 import FormField from "../Components/FormField";
-import ImageElement from "../Components/ImageElement";
-import Navbar from "../Components/Navbar";
 import NavPagesParent from "../Components/NavPagesParent";
 import CreateStage from "../ModalForms/CreateStage";
 import CreateTask from "../ModalForms/CreateTask";
