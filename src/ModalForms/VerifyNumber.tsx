@@ -68,7 +68,7 @@ export default function CreateBoard(props:{
     return (
         <ModalParent loading={submitLoading} open={props.open} title="Verify Your Number" toogleOpen={props.toogleOpen} handleSubmit={handleSubmit}>
             <div className="flex flex-col ml-5 gap-y-2">
-                <FormField id="1" label="Verification Code" type="text" handleChangeCB={handleVerificationCodeChange} value={verificationCode}/>
+                <FormField id="1" label="Verification Code" type="number" handleChangeCB={handleVerificationCodeChange} value={verificationCode}/>
                 {Object.keys(error).length !== 0 && <p className='text-red-600 text-center mt-10'>{error.code} <br/> {error.phone}</p>}
             </div>
         </ModalParent>

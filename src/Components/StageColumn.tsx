@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { deleteStage } from "../api/apiSuper";
 import { StageApi } from "../types/api/task";
 import { Task } from "../types/tasks";
-import ImageElement from "./ImageElement";
 import TaskCard from "./TaskCard";
 import {Droppable} from 'react-beautiful-dnd'
 import { TrashIcon } from "@heroicons/react/outline";
@@ -23,7 +22,8 @@ export default function StageColumn(props:{
         }
         catch(error)
         {
-
+            setLoading(false)
+            return
         }
 
         setLoading(false)

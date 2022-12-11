@@ -59,21 +59,35 @@ const request = async (endpoint: string, method:RequestMethod = 'GET', data:any 
         })
     }
     
-
     if(response.ok) {
+        
         if(returnData)
         {
             const json = await response.json();
             return json;
         }
-    } else {
-        const errorJson = await response.json()
-        Object.values(errorJson).forEach((errors:any)=>{
-            errors.forEach((error:string)=>{
-                triggerToast("error", error)
+    } 
+    else {
+        
+        let errorJson = null
+        try{
+            errorJson = await response.json()
+        }
+        catch
+        {
+            triggerToast("error", "Something went wrong")
+            throw Error("Something went wrong")
+        }
+        
+        if(errorJson)
+        {
+            Object.values(errorJson).forEach((errors:any)=>{
+                errors.forEach((error:string)=>{
+                    triggerToast("error", error)
+                })
             })
-        })
-        throw Error(errorJson);
+            throw Error(errorJson);
+        }
 
     }
 } 
@@ -140,6 +154,10 @@ export const createBoard = (board:BoardCreateApi)=>{
 
 export const editBoard = (board_id:number, board:BoardCreateApi)=>{
     return request(`board/${board_id}/`, 'PUT', board, false)
+}
+
+export const deleteBoard = (board_id:number)=>{
+    return request(`board/${board_id}/`, 'DELETE', {}, false)
 }
 
 export const getBoard = (board_id:number)=>{
