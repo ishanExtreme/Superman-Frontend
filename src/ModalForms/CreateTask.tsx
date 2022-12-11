@@ -155,6 +155,7 @@ export default function CreateTask(props:{
             {
                 // console.log(error)
                 // triggerToast("error", "Server Error, Please try again later.")
+                setSubmitLoading(false)
             }
         }
         else {
