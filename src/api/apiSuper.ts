@@ -170,3 +170,15 @@ export const passwordResetConfirm = (token:string, password:string)=>{
     return request("password-reset/confirm/", "POST", {token:token, password:password}, false)
 }
 
+export const sendVerificationCode = (phone:string)=>{
+    return request("send-verification-code/", "POST", {phone:phone}, false)
+}
+
+export const verifyCode = (phone:string, code:string)=>{
+    return request("verify-code/", "POST", {phone:phone, code:code}, false)
+}
+
+export const configureWhatsapp = (body:any)=>{
+    return request("configure-watsapp/", "PATCH", body, false)
+}
+

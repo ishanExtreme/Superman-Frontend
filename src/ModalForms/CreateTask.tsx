@@ -202,7 +202,7 @@ export default function CreateTask(props:{
                 </div>
                 <FormField id="4" label="Due Date" type="date" value={dueDate} handleChangeCB={handleDueDateChange} />
                 
-                {Object.keys(error).length !== 0 && <p className='text-yellow-400 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.priority} <br/> {error.stage} <br/> {error.due_date}</p>}
+                {Object.keys(error).length !== 0 && <p className='text-red-600 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.priority} <br/> {error.stage} <br/> {error.due_date}</p>}
             </div>
         </ModalParent>
     );

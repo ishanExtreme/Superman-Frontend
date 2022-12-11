@@ -68,7 +68,7 @@ export default function CreateStage(props:{
             <div className="flex flex-col ml-5 gap-y-2">
                 <FormField id="1" label="Title" type="text" handleChangeCB={handleChangeTitle} value={title}/>
                 <TextAreaField id="2" label="Description" handleChangeCB={handleChangeDescription} value={description}/>
-                {Object.keys(error).length !== 0 && <p className='text-yellow-400 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.board} </p>}
+                {Object.keys(error).length !== 0 && <p className='text-red-600 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.board} </p>}
             </div>
         </ModalParent>
     );

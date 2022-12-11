@@ -7,6 +7,7 @@ import { createTask, editTask, getBoards, stagesOfBoard } from "../api/apiSuper"
 import DropDownField from "../Components/DropDownField";
 import { Error } from "../types/api/user";
 import { Task } from "../types/tasks";
+import { triggerToast } from "../utils/notification";
 
 
 const getBoardsApiCall = async (setLoading:(load:boolean)=>void, 
@@ -21,7 +22,9 @@ setBoards:(board:BoardApi[])=>void)=>{
     }
     catch(error)
     {
-        console.log(error)
+        triggerToast("error", "Error in fetching boards")
+        setLoading(false)
+        return;
     }
 
     setLoading(false)
@@ -162,10 +165,7 @@ export default function EditTask(props:{
             }
         }
         else {
-            // if(validationError.username)
-            //     triggerToast("warning", `${validationError.username}`)
-            // if(validationError.password)
-            //     triggerToast("warning", `${validationError.password}`)
+            setSubmitLoading(false)
         }
 
         setBoardLoading(false)
@@ -205,7 +205,7 @@ export default function EditTask(props:{
                 </div>
                 <FormField id="4" label="Due Date" type="date" value={dueDate} handleChangeCB={handleDueDateChange} />
                 
-                {Object.keys(error).length !== 0 && <p className='text-yellow-400 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.priority} <br/> {error.stage} <br/> {error.due_date}</p>}
+                {Object.keys(error).length !== 0 && <p className='text-red-600 text-center mt-10'>{error.title} <br/> {error.description} <br/> {error.priority} <br/> {error.stage} <br/> {error.due_date}</p>}
             </div>
         </ModalParent>
     );

@@ -14,7 +14,7 @@ export type UserLoginApi = {
 export type User = {
     username: string,
     email: string,
-    number: string | null,
+    phone: string | null,
     wa_sending: boolean,
     notification_on: boolean,
 } | null
