@@ -2,6 +2,7 @@ import { MailIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { passwordResetSendEmail } from "../api/apiSuper";
 import FormField from "../Components/FormField";
+import Loading from "../Components/Loading";
 import NavPagesParent from "../Components/NavPagesParent";
 import { triggerToast } from "../utils/notification";
 import ForgotPassword2 from "./ForgotPassword2";
@@ -11,6 +12,7 @@ export default function ForgotPassword1() {
 
     const [email, setEmail] = useState("")
     const [step2, setStep2] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleChangeEmail = (e:any)=>{
         setEmail(e.target.value)
@@ -18,18 +20,23 @@ export default function ForgotPassword1() {
 
     const handleEmailSend = async ()=>{
 
+        setLoading(true)
+
         if(email === "")
         {
             triggerToast("error", "Please enter an email")
+            setLoading(false)
             return
         }
 
         try{
             await passwordResetSendEmail(email)
+            setLoading(false)
         }
         catch(err)
         {
             triggerToast("error", "Error in sending email")
+            setLoading(false)
             return
         }
         setStep2(true)
@@ -58,7 +65,9 @@ export default function ForgotPassword1() {
                     />
 
                     <div className="flex justify-center">
-                        
+                        {loading?
+                        <Loading />
+                        :
                         <button 
                         onClick={handleEmailSend} 
                         type="button" 
@@ -66,6 +75,7 @@ export default function ForgotPassword1() {
                             <MailIcon className="h-5 w-5 mr-2" />
                             Send Email
                         </button>
+                        }
                         
                     </div>
                 </div>

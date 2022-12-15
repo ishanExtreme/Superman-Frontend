@@ -86,3 +86,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
   Do star ⭐ the repo if you like the project
 </h2>
 
+<!-- 3rd api party used -->
+<!-- Twilio for WA -->
+<!-- Mailgub for emails -->
