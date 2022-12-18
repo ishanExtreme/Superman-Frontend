@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getBoardsFiltered } from "../api/apiSuper";
 import BoardCard from "../Components/BoardCard";
-import Navbar from "../Components/Navbar";
 import NavbarResponsive from "../Components/NavbarResponsive";
 import NavPagesParent from "../Components/NavPagesParent";
 import SearchBar from "../Components/SearchBar";

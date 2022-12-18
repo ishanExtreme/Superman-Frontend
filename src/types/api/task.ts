@@ -30,6 +30,11 @@ export type StageApi = {
     board_name: string
 }
 
+export type VerificationApi = {
+    code: string,
+    phone: string
+}
+
 export type Error<T> = Partial<Record<keyof T, string>>
 
 export const validateTaskCreation = (task:TaskCreateApi) => {
@@ -111,6 +116,27 @@ export const validateStageCreation = (stage:StageCreateApi) => {
     }
     if(!stage.board) {
         errors.board = "Board not provided"
+    }
+
+    return errors;
+}
+
+export const validateVerification = (verification:VerificationApi) => {
+    const errors: Error<VerificationApi> = {}
+
+    if(verification.code.length < 1) {
+        errors.code = "Code is Required"
+    }
+    if(verification.code.length !== 6) {
+        errors.code = "Verification code must be 6 characters"
+    }
+
+    if(verification.phone.length < 1) {
+        errors.phone = "Phone is Required"
+    }
+
+    if(verification.phone.length !== 10) {
+        errors.phone = "Phone number must be 10 characters"
     }
 
     return errors;

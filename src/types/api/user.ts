@@ -14,6 +14,9 @@ export type UserLoginApi = {
 export type User = {
     username: string,
     email: string,
+    phone: string | null,
+    wa_sending: boolean,
+    notification_on: boolean,
 } | null
 
 export type Error<T> = Partial<Record<keyof T, string>>

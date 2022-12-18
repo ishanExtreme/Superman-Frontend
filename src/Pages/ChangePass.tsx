@@ -21,6 +21,7 @@ const changePasswordHelper = async (
     catch(error)
     {
         triggerToast("error", "Password change failed")
+        setLoading(false)
         return
     }
 

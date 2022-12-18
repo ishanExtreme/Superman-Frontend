@@ -20,6 +20,7 @@ const passwordResetHelper = async (
         }
         catch {
             triggerToast("error", "Password Change Failed")
+            setLoading(false)
             return
         }
 

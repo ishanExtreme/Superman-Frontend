@@ -2,7 +2,7 @@ import { BoardCreateApi, StageCreateApi, TaskCreateApi } from "../types/api/task
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/"
+const API_BASE_URL = "https://web-production-cff9.up.railway.app/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
@@ -59,21 +59,35 @@ const request = async (endpoint: string, method:RequestMethod = 'GET', data:any 
         })
     }
     
-
     if(response.ok) {
+        
         if(returnData)
         {
             const json = await response.json();
             return json;
         }
-    } else {
-        const errorJson = await response.json()
-        Object.values(errorJson).forEach((errors:any)=>{
-            errors.forEach((error:string)=>{
-                triggerToast("error", error)
+    } 
+    else {
+        
+        let errorJson = null
+        try{
+            errorJson = await response.json()
+        }
+        catch
+        {
+            triggerToast("error", "Something went wrong")
+            throw Error("Something went wrong")
+        }
+        
+        if(errorJson)
+        {
+            Object.values(errorJson).forEach((errors:any)=>{
+                errors.forEach((error:string)=>{
+                    triggerToast("error", error)
+                })
             })
-        })
-        throw Error(errorJson);
+            throw Error(errorJson);
+        }
 
     }
 } 
@@ -92,6 +106,10 @@ export const me = ()=>{
 
 export const taskList = (filters:any)=>{
     return request('task', 'GET', filters)
+}
+
+export const tasksofBoard = (board_id:number, filters:any)=>{
+    return request(`board/${board_id}/task`, 'GET', filters)
 }
 
 export const stagesOfBoard = (board_id:number)=>{
@@ -138,6 +156,10 @@ export const editBoard = (board_id:number, board:BoardCreateApi)=>{
     return request(`board/${board_id}/`, 'PUT', board, false)
 }
 
+export const deleteBoard = (board_id:number)=>{
+    return request(`board/${board_id}/`, 'DELETE', {}, false)
+}
+
 export const getBoard = (board_id:number)=>{
     return request(`board/${board_id}`, 'GET')
 }
@@ -164,5 +186,17 @@ export const passwordResetSendEmail = (email:string)=>{
 
 export const passwordResetConfirm = (token:string, password:string)=>{
     return request("password-reset/confirm/", "POST", {token:token, password:password}, false)
+}
+
+export const sendVerificationCode = (phone:string)=>{
+    return request("send-verification-code/", "POST", {phone:phone}, false)
+}
+
+export const verifyCode = (phone:string, code:string)=>{
+    return request("verify-code/", "POST", {phone:phone, code:code}, false)
+}
+
+export const configureWhatsapp = (body:any)=>{
+    return request("configure-watsapp/", "PATCH", body, false)
 }
 

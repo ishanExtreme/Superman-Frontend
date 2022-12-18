@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { changeTaskStage, getBoard, stagesOfBoard, taskList } from "../api/apiSuper";
+import { changeTaskStage, getBoard, stagesOfBoard, tasksofBoard } from "../api/apiSuper";
 import DropDownField from "../Components/DropDownField";
 import FormField from "../Components/FormField";
-import ImageElement from "../Components/ImageElement";
-import Navbar from "../Components/Navbar";
 import NavPagesParent from "../Components/NavPagesParent";
 import CreateStage from "../ModalForms/CreateStage";
 import CreateTask from "../ModalForms/CreateTask";
@@ -31,7 +29,8 @@ const getTasks = async (
     setLoading:(load:boolean)=>void,
     setTask:(task:Task[])=>void, 
     date:string,
-    boardId?:number,
+    boardId:number,
+    refresh:boolean,
     setStage?:(stage:StageApi[])=>void,
     setBoard?:(board:Board)=>void)=>{
 
@@ -41,7 +40,7 @@ const getTasks = async (
             due_date:date
         }
         try{
-        const tasks:Task[] = await taskList(filterList)
+        const tasks:Task[] = await tasksofBoard(boardId, filterList)
 
         setTask(tasks)
         }
@@ -49,7 +48,7 @@ const getTasks = async (
         {
             // console.log(error)
         }
-        if(boardId && setStage && setBoard)
+        if(refresh && setStage && setBoard)
         {
             getBoardFromId(boardId, setLoading, setStage,  setBoard)
         }
@@ -114,7 +113,7 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
     const [tasks, setTasks] = useState<Task[]>([] as Task[])
 
     useEffect(()=>{
-        getTasks(setLoading, setTasks, "", props.boardId, setStages, setBoard)
+        getTasks(setLoading, setTasks, "", props.boardId, true ,setStages, setBoard)
     },[])
 
     const openEditToogle = (open:boolean)=>{
@@ -159,12 +158,12 @@ export default function BoardDetail(props:{boardId:number, currentUser:User}){
     }
 
     const modifyResult = async ()=>{
-        await getTasks(setLoading, setTasks, date)
+        await getTasks(setLoading, setTasks, date, props.boardId, false)
         triggerToast("info", "Tasks Filtered")
     }
 
     const handleClearFilter = async ()=>{
-        await getTasks(setLoading, setTasks, "", props.boardId, setStages, setBoard) 
+        await getTasks(setLoading, setTasks, "", props.boardId, true,setStages, setBoard) 
         setDate("")
         triggerToast("info", "Filters Cleared")  
     }
