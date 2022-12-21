@@ -2,7 +2,7 @@ import { BoardCreateApi, StageCreateApi, TaskCreateApi } from "../types/api/task
 import { UserLoginApi, UserRegisterApi } from "../types/api/user";
 import { triggerToast } from "../utils/notification";
 
-const API_BASE_URL = "https://web-production-cff9.up.railway.app/api/"
+const API_BASE_URL = "https://api.supertaskman.tech/api/"
 
 type RequestMethod = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT'
 
