@@ -54,16 +54,16 @@ export default function BoardCard(props:{
     return (
         <>
             <EditBoard open={openEdit} toogleOpen={handleOpenEditToogle} board={props.board} />
-            <div className="flex flex-col gap-y-5 p-5 bg-white shadow-lg rounded-2xl w-[400px] h-[200px]">
+            <div className="flex flex-col gap-y-5 p-5 bg-white shadow-lg rounded-2xl w-[330px] h-[210px]">
                 <div className="flex flex-row justify-between">
-                    <p className="font-semibold text-xl">{props.board.title}</p>
+                    <p className="font-semibold text-xl truncate">{props.board.title}</p>
                     {loading?
                     <Loading/>
                     :
                     <DropDownIcon options={options} handleSelectCB={handleSelect} />
                     }   
                 </div>
-                <p>{props.board.description}</p>
+                <p className="truncate">{props.board.description}</p>
                 <div className="mt-5 flex space-x-2 justify-center">
                     <button onClick={handleBoardOpen} type="button" className="inline-block px-6 py-2.5 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-800 hover:shadow-lg focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-900 active:shadow-lg transition duration-150 ease-in-out">
                         Open
